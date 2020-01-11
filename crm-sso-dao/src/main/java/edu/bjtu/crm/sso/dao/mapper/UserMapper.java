@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface UserMapper {
-    String s = "SELECT count(1) FROM";
-    @Select(s + " crm_sso_user WHERE username = #{username} and password = #{password}")
+//    String s = "SELECT count(1) FROM";
+//    @Select("SELECT count(1) FROM crm_sso_user WHERE username = #{username} and password = #{password}")
     int findUserByIdAndName(@Param("username") String username,@Param("password") String password);
 }

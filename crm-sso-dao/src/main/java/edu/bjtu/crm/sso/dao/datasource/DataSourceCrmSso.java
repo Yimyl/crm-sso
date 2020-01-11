@@ -1,6 +1,5 @@
 package edu.bjtu.crm.sso.dao.datasource;
 
-import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
