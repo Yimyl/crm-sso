@@ -1,15 +1,16 @@
 package edu.bjtu.crm.sso.dao.datasource;
 
-import com.sun.xml.internal.bind.v2.util.DataSourceSource;
-import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 import javax.sql.DataSource;
 
 @Configuration
+@PropertySource({"classpath:db.properties"})
 public class DataSourceCrmSso {
     @Value("${datasource.jdbc.crm.sso.driverClassName}")
     private String dbDriver;
@@ -25,11 +26,12 @@ public class DataSourceCrmSso {
 
     @Bean
     public DataSource getDateSource(){
-        HikariDataSource dataSource = new HikariDataSource();
-        dataSource.setDriverClassName(dbDriver);
-        dataSource.setJdbcUrl(dbUrl);
-        dataSource.setUsername(dbUsername);
-        dataSource.setPassword(dbPassword);
-        return dataSource;
+        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
+        dataSourceBuilder.driverClassName(dbDriver);
+        dataSourceBuilder.url(dbUrl);
+        dataSourceBuilder.username(dbUsername);
+        dataSourceBuilder.password(dbPassword);
+        return dataSourceBuilder.build();
     }
+
 }
