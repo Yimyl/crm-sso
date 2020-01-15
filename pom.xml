@@ -8,6 +8,7 @@
         <module>crm-sso-service</module>
         <module>crm-sso-common</module>
         <module>crm-sso-web</module>
+        <module>crm-sso-domain</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
