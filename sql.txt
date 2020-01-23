@@ -1,0 +1,3 @@
+create table crm_sso_user(id int(15) unsigned NOT NULL auto_increment primary key,username varchar(20) NOT NULL,
+password varchar(40) NOT NULL,
+UNIQUE 	key uni_idx_uname(username));
