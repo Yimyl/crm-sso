@@ -3,23 +3,28 @@ package edu.bjtu.crm.sso.web.controller;
 import edu.bjtu.crm.sso.dao.mapper.UserMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 
 @Controller
-@RequestMapping("/login")
 public class Login {
 
     @Resource
     private UserMapper userMapper;
 
-    @RequestMapping("/")
-    @ResponseBody
+    @RequestMapping("/login")
     public String login() {
         System.out.println(userMapper.findUserByIdAndName("zzj", "hh"));
-        return "asd";
+        return "login";
     }
 
+    @RequestMapping("/register")
+    public String register() {
+        return "register";
+    }
 
+    @RequestMapping("/findAccount")
+    public String findAccount() {
+        return "findAccount";
+    }
 }
