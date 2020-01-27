@@ -2,7 +2,9 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>找回密码</title>
+    <#--    <link rel="stylesheet" type="text/css" href="/css/view/login.css">-->
+    <link rel="stylesheet" type="text/script" href="/js/jquery-3.3.1.min.js?version=2020012301">
 </head>
 <body>
     <div>
