@@ -33,6 +33,7 @@
     margin: 20px 0 0;
     padding-right: 30px;
     text-align: right;
+    color: #62a8ea;
 }
 
 .sso-login-container input {
@@ -50,8 +51,25 @@
 .sso-login-remember{
     margin: 10px 30px;
 }
+.sso-login-remember label{
+    width: 50px;
+    height: 18px;
+}
+.sso-login-remember input{
+    margin: auto;
+    width: 17px;
+    height: 17px;
+}
+
+.sso-login-remember span{
+    margin-left: 5px;
+    margin-bottom: 2px;
+    position: relative;
+    font-size: 14px;
+}
 
 .sso-login-remember a{
+    text-decoration: none;
     float: right;
     margin: auto 0;
     font-size: 13px;
@@ -60,17 +78,28 @@
 
 .sso-login-button{
     height: 50px;
-    width: 160px;
+    width: 410px;
     margin: 0 30px;
-    font-size: 20px;
-}
-
-.sso-login-button-left{
-    border: 4px;
-    border-color: #76838f;
+    font-size: 30px;
+    color: #ffffff;
     background-color: #62a8ea;
+    border: 2px solid #5290ea;
 }
 
-.sso-login-button-right{
+.sso-register-tip{
     float: right;
+}
+
+.sso-register-tip span{
+    margin: auto 0;
+    font-size: 13px;
+    color: #a9a9a9;
+}
+
+.sso-register-tip a{
+    text-decoration: none;
+    margin: auto 0;
+    margin-right: 30px;
+    font-size: 13px;
+    color: #ff0000;
 }

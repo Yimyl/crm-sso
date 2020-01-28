@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>登录</title>
     <link rel="stylesheet" type="text/css" href="/css/view/login.css">
-    <link rel="stylesheet" type="text/script" href="/js/jquery-3.3.1.min.js?version=2020012301">
+    <script type="text/javascript" src="/js/jquery-3.3.1.min.js?version=2020012301"></script>
+    <script type="text/javascript" src="/js/login.js?version=2020012301"></script>
 </head>
 <body>
 <div class="sso-login">
@@ -17,19 +18,21 @@
                 用户名:<input type="text" name="username" value="${username}" placeholder="请输入用户名">
             </div>
             <div class="sso-login-container">
-                密码: <input type="password" name="password" placeholder="请输入密码">
+                密码: <input type="password" name="password" minlength="6" maxlength="16" placeholder="请输入6~16位字符组成的密码">
             </div>
             <div class="sso-login-container">
                 验证码:<input type="text" name="validcode" placeholder="请输入验证码">
                 <img class="validation-img" src="../img/captcha.png" title="看不清楚？点击换一张">
             </div>
             <div class="sso-login-remember">
-            <input type="checkbox" name="remember" <#if isRemember>checked</#if>><span>记住我</span>
+                <label><input type="checkbox" class="a" name="remember" <#if isRemember>checked</#if>><span>记住我</span></label>
             <a href="/findAccount">忘记密码</a>
             </div>
             <div>
-                <input class="sso-login-button sso-login-button-left" type="submit" value="登 录">
-                <input class="sso-login-button sso-login-button-right" type="button" value="注 册" onclick="window.location.href = '/register'">
+                <input class="sso-login-button" type="submit" value="登 录">
+            </div>
+            <div class="sso-register-tip">
+                <span>还没有账号?</span><a href="/register">立即注册</a>
             </div>
         </form>
     </div>
