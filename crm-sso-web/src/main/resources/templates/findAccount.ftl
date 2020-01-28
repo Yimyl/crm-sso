@@ -17,7 +17,7 @@
                 用户名:<input type="text" name="username" placeholder="请输入用户名">
             </div>
             <div class="sso-findAccount-container">
-                验证码:<input type="text" name="validcode" placeholder="请输入验证码" minlength="6" maxlength="6">
+                验证码:<input type="text" name="validcode" placeholder="请输入验证码" maxlength="6">
                 <button>发送验证码到邮箱</button>
             </div>
             <div>

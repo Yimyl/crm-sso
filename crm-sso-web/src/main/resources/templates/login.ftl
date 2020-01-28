@@ -6,11 +6,12 @@
     <link rel="stylesheet" type="text/css" href="/css/view/login.css">
     <script type="text/javascript" src="/js/jquery-3.3.1.min.js?version=2020012301"></script>
     <script type="text/javascript" src="/js/login.js?version=2020012301"></script>
+<#--    <script type="text/javascript" src="/js/crypto/sha256.js?version=2020012301"></script>-->
 </head>
 <body>
 <div class="sso-login">
     <div class="sso-login-panel">
-        <form class="myform" method="post" action="/login">
+        <form class="myform" method="post">
             <div class="sso-login-title">
                 <h2>用户登陆</h2>
             </div>
@@ -18,7 +19,7 @@
                 用户名:<input type="text" name="username" value="${username}" placeholder="请输入用户名">
             </div>
             <div class="sso-login-container">
-                密码: <input type="password" name="password" minlength="6" maxlength="16" placeholder="请输入6~16位字符组成的密码">
+                密码: <input type="password" name="password" maxlength="16" placeholder="请输入6~16位字符组成的密码">
             </div>
             <div class="sso-login-container">
                 验证码:<input type="text" name="validcode" placeholder="请输入验证码">
@@ -28,13 +29,13 @@
                 <label><input type="checkbox" class="a" name="remember" <#if isRemember>checked</#if>><span>记住我</span></label>
             <a href="/findAccount">忘记密码</a>
             </div>
-            <div>
-                <input class="sso-login-button" type="submit" value="登 录">
-            </div>
-            <div class="sso-register-tip">
-                <span>还没有账号?</span><a href="/register">立即注册</a>
-            </div>
         </form>
+        <div>
+            <input class="sso-login-button" type="button" onclick="submitForm()" value="登 录">
+        </div>
+        <div class="sso-register-tip">
+            <span>还没有账号?</span><a href="/register">立即注册</a>
+        </div>
     </div>
 </div>
 </body>
