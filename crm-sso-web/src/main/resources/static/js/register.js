@@ -11,7 +11,7 @@ function submitRegisterForm() {
         url: "/doRegister",
         type: "post",
         data: data,
-        dataType: "json",
+        dataType: "text",
         processData: false, // 告诉jquery不要处理数据
         contentType: false, // 告诉jquery不要设置contentType
         success: function (data) {

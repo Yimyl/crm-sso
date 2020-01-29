@@ -1,5 +1,6 @@
 $(function () {
     // $("#sso-login-remember input").onclick(checkboxClick());
+    //如果需要验证码，发送图片请求
 });
 
 function checkboxClick() {
@@ -9,22 +10,42 @@ function checkboxClick() {
 }
 
 function submitForm() {
-    if (false) {
-        return;
-    }
     var data = new FormData($(".myform")[0]);
+    if (data.get("username").length < 6 || data.get("username").length > 20) {
+        alert("请输入6-20位用户名");
+    }
+    if (data.get("password").length < 6 || data.get("password").length > 16) {
+        alert("请输入6-16位密码");
+    }
+    if (!$(".validcode").parent().hasClass("displayNone") && data.get("validcode").length != 4) {
+        alert("请输入4位验证码");
+    }
+
     $.ajax({
         url: "/doLogin",
         data: data,
+        // data: JSON.stringify(data),
         type: "POST",
-        dataType: "json",
+        dataType: "text",
         processData: false, // 告诉jquery不要处理数据
-        contentType: false, // 告诉jquery不要设置contentType
+        contentType: "text/html;charset=utf-8", // 告诉jquery不要设置contentType
         success: function (data) {
+            if (data == "home") {
+                window.location.href='/home';
+            } else {
+                $(".validcode").parent().removeClass("displayNone");
+            }
             alert("ok");
+            alert(data);
         },
         error: function (data) {
+            if (data == "home") {
+                window.location.href='/home';
+            } else {
+                $(".validcode").parent().removeClass("displayNone");
+            }
             alert("no");
+            alert(data == "login");
         }
     })
 }

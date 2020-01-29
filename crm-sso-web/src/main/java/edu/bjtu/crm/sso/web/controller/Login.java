@@ -2,9 +2,13 @@ package edu.bjtu.crm.sso.web.controller;
 
 import edu.bjtu.crm.sso.dao.mapper.UserMapper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class Login {
@@ -13,20 +17,37 @@ public class Login {
     private UserMapper userMapper;
 
     @RequestMapping("/login")
-    public String login(String username, String password) {
+    public String login(HttpServletRequest request, HttpServletResponse response, Model model, String username, String password) {
+        Cookie[] cookies = request.getCookies();
+        for (int i = 0; i < cookies.length; i++) {
+            System.out.println(cookies[i].getName() +" " +cookies[i].getValue());
+            if(cookies[i].getName() == "token") {
+                model.addAttribute("username", username);
+                return "home";
+            }
+        }
         System.out.println(username + "abc" + password);
+        if (username != null) {
+            model.addAttribute("username", username);
+        } else {
+            model.addAttribute("firstLogin", true);
+        }
         return "login";
     }
 
     @RequestMapping("/doLogin")
-    public String doLogin(String username, String password) {
+    @ResponseBody
+    public String doLogin(HttpServletRequest request, HttpServletResponse response, Model model, String username, String password) {
         System.out.println(username + "abc" + password);
 
         System.out.println(userMapper.findUserByIdAndName("zzj", "hh"));
         if (userMapper.findUserByIdAndName("zzj", "hh") == 1) {
+            Cookie cookie = new Cookie("token", username);
+            response.addCookie(cookie);
             return "home";
         }
-        return "redirect:/login";
+        request.getSession().setAttribute("validCode", "1234");
+        return "login";
     }
 
     @RequestMapping("/register")
