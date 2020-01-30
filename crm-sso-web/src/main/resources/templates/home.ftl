@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="sso-login">
-欢迎
+欢迎${username}
 </div>
 </body>
 </html>

@@ -15,6 +15,7 @@
             <div class="sso-register-title">
                 <h2>用户注册</h2>
             </div>
+            <div class="sso-tip displayNone"></div>
             <div class="sso-register-container">
                 用户名:<input type="text" name="username" placeholder="请输入用户名">
             </div>

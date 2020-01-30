@@ -13,14 +13,19 @@ function submitForm() {
     var data = new FormData($(".myform")[0]);
     if (data.get("username").length < 6 || data.get("username").length > 20) {
         alert("请输入6-20位用户名");
+        return false;
     }
     if (data.get("password").length < 6 || data.get("password").length > 16) {
         alert("请输入6-16位密码");
+        return false;
     }
     if (!$(".validcode").parent().hasClass("displayNone") && data.get("validcode").length != 4) {
         alert("请输入4位验证码");
+        return false;
     }
-
+    if ($(".remember").prop("checked")) {
+        $(".remember").attr("value", "remember");
+    }
     $.ajax({
         url: "/doLogin",
         data: data,
@@ -30,22 +35,23 @@ function submitForm() {
         processData: false, // 告诉jquery不要处理数据
         contentType: "text/html;charset=utf-8", // 告诉jquery不要设置contentType
         success: function (data) {
-            if (data == "home") {
+            if (data == "success") {
                 window.location.href='/home';
-            } else {
-                $(".validcode").parent().removeClass("displayNone");
+                return;
             }
-            alert("ok");
-            alert(data);
+            $(".validcode").parent().removeClass("displayNone");
+            $(".sso-tip").removeClass("displayNone");
+            if (data == "validcodeError") {
+                $(".sso-tip").html("验证码错误");
+                return;
+            }
+            if (data == "usernamepasswordError") {
+                $(".sso-tip").html("用户名或密码错误");
+                return;
+            }
         },
         error: function (data) {
-            if (data == "home") {
-                window.location.href='/home';
-            } else {
-                $(".validcode").parent().removeClass("displayNone");
-            }
-            alert("no");
-            alert(data == "login");
+            alert("系统错误，请联系管理员");
         }
     })
 }

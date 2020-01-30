@@ -16,18 +16,20 @@
             <div class="sso-login-title">
                 <h2>用户登陆</h2>
             </div>
+            <div class="sso-tip displayNone"></div>
             <div class="sso-login-container">
                 用户名:<input type="text" class="username" name="username" value="${username}" placeholder="请输入用户名">
             </div>
             <div class="sso-login-container">
                 密码: <input type="password" class="password" name="password" maxlength="16" placeholder="请输入密码">
             </div>
+
             <div class="sso-login-container <#if firstLogin == 'true'>displayNone</#if>">
                 验证码:<input type="text" class="validcode" name="validcode" placeholder="请输入验证码">
                 <img class="validation-img" src="../img/captcha.png" title="看不清楚？点击换一张">
             </div>
             <div class="sso-login-remember">
-                <label><input type="checkbox" class="a" name="remember" <#if isRemember>checked</#if>><span>记住我</span></label>
+                <label><input type="checkbox" class="remember" name="remember"><span>记住我</span></label>
             <a href="/findAccount">忘记密码</a>
             </div>
         </form>

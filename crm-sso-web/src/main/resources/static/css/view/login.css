@@ -103,3 +103,11 @@
     font-size: 13px;
     color: #ff0000;
 }
+
+
+.sso-tip {
+    margin-right: 30px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #ff0000;
+}

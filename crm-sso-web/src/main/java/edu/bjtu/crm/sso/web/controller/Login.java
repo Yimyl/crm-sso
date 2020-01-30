@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class Login {
@@ -17,51 +18,80 @@ public class Login {
     private UserMapper userMapper;
 
     @RequestMapping("/login")
-    public String login(HttpServletRequest request, HttpServletResponse response, Model model, String username, String password) {
+    public String login(HttpServletRequest request, HttpServletResponse response, Model model) {
         Cookie[] cookies = request.getCookies();
         for (int i = 0; i < cookies.length; i++) {
             System.out.println(cookies[i].getName() +" " +cookies[i].getValue());
             if(cookies[i].getName() == "token") {
-                model.addAttribute("username", username);
+                model.addAttribute("username", cookies[i].getValue());
                 return "home";
             }
         }
-        System.out.println(username + "abc" + password);
-        if (username != null) {
-            model.addAttribute("username", username);
-        } else {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("validcode") == null){
             model.addAttribute("firstLogin", true);
+        } else {
+            session.setAttribute("validcode", "1234");
         }
         return "login";
     }
 
     @RequestMapping("/doLogin")
     @ResponseBody
-    public String doLogin(HttpServletRequest request, HttpServletResponse response, Model model, String username, String password) {
+    public String doLogin(HttpServletRequest request, HttpServletResponse response, String username, String password, String validcode, String remember) {
         System.out.println(username + "abc" + password);
-
+        HttpSession session = request.getSession();
         System.out.println(userMapper.findUserByIdAndName("zzj", "hh"));
-        if (userMapper.findUserByIdAndName("zzj", "hh") == 1) {
-            Cookie cookie = new Cookie("token", username);
-            response.addCookie(cookie);
-            return "home";
+        //校验验证码
+        if (session.getAttribute("validcode") != null && session.getAttribute("validcode").equals(validcode)) {
+            //生成验证码
+            session.setAttribute("validcode", "1234");
+            return "validcodeError";
         }
-        request.getSession().setAttribute("validCode", "1234");
-        return "login";
+        //验证账号
+        if (userMapper.findUserByIdAndName("zzj", "hh") == 1) {
+            session.removeAttribute("validcode");
+            //给token
+            Cookie cookie = new Cookie("token", username);
+            if (remember == "remember") {
+                cookie.setMaxAge(7*24*3600);
+            } else {
+                cookie.setMaxAge(-1);
+            }
+            response.addCookie(cookie);
+            return "success";
+        }
+        //生成验证码
+        session.setAttribute("validcode", "1234");
+        return "usernamepasswordError";
     }
 
     @RequestMapping("/register")
-    public String register(String username, String password, String password2, String email) {
+    public String register(HttpServletRequest request, String username, String password, String password2, String email) {
+        request.getSession().setAttribute("registerValidcode", "1234");
         System.out.println(username + " " + password + " " + email);
 //        userMapper.addUser(username, password, email);
+
         return "register";
     }
 
     @RequestMapping("/doRegister")
-    public String doRegister(String username, String password, String password2, String email) {
+    @ResponseBody
+    public String doRegister(HttpServletRequest request, String username, String password, String password2, String email, String validcode) {
+
         System.out.println(username + " " + password + " " + email);
+        HttpSession session = request.getSession();
+        if (username.length() < 6 || username.length() > 20 || password.length() < 6 || password.length() > 16 || !password.equals(password2) || email.length() > 30) {
+            session.setAttribute("validcode", "1234");
+            return "paramError";
+        }
+        if (session.getAttribute("validcode") != null && session.getAttribute("registerValidcode").equals(validcode)) {
+            //生成验证码
+            session.setAttribute("validcode", "1234");
+            return "validcodeError";
+        }
 //        userMapper.addUser(username, password, email);
-        return "redirect:/register";
+        return "success";
     }
 
     @RequestMapping("/findAccount")
