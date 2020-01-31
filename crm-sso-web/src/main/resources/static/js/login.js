@@ -33,7 +33,7 @@ function submitForm() {
         type: "POST",
         dataType: "text",
         processData: false, // 告诉jquery不要处理数据
-        contentType: "text/html;charset=utf-8", // 告诉jquery不要设置contentType
+        contentType: false, // 告诉jquery不要设置contentType
         success: function (data) {
             if (data == "success") {
                 window.location.href='/home';
@@ -43,15 +43,25 @@ function submitForm() {
             $(".sso-tip").removeClass("displayNone");
             if (data == "validcodeError") {
                 $(".sso-tip").html("验证码错误");
-                return;
-            }
-            if (data == "usernamepasswordError") {
+            } else if (data == "usernamepasswordError") {
                 $(".sso-tip").html("用户名或密码错误");
-                return;
             }
+            $(".password").prop("value", "");
+            $(".validcode").prop("value", "");
+            getCode();
         },
         error: function (data) {
             alert("系统错误，请联系管理员");
         }
     })
+}
+
+//获取验证码
+function getCode(){
+    $(".sso-validcode-img").attr("src", "/valid-code?"+Math.random());
+}
+
+//刷新验证码
+function getRefreshCode(){
+    $(".sso-validcode-img").attr("src", "/refresh-valid-code?"+Math.random());
 }

@@ -23,10 +23,9 @@
             <div class="sso-login-container">
                 密码: <input type="password" class="password" name="password" maxlength="16" placeholder="请输入密码">
             </div>
-
             <div class="sso-login-container <#if firstLogin == 'true'>displayNone</#if>">
                 验证码:<input type="text" class="validcode" name="validcode" placeholder="请输入验证码">
-                <img class="validation-img" src="../img/captcha.png" title="看不清楚？点击换一张">
+                <img class="sso-validcode-img" src="/valid-code" title="看不清楚？点击换一张" alt="更换验证码" onclick="getRefreshCode()">
             </div>
             <div class="sso-login-remember">
                 <label><input type="checkbox" class="remember" name="remember"><span>记住我</span></label>

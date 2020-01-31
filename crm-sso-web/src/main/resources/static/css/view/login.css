@@ -48,6 +48,11 @@
     outline: none;
     color: #76838f;
 }
+
+.sso-validcode-img{
+    height: 36px;
+}
+
 .sso-login-remember{
     margin: 10px 30px;
 }

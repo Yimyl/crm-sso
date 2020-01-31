@@ -5,8 +5,9 @@
     <title>注册</title>
     <link rel="stylesheet" type="text/css" href="/css/view/register.css">
     <script type="text/javascript" src="/js/jquery-3.3.1.min.js?version=2020012301"></script>
+    <script type="text/javascript" src="/js/crypto/crypto-js.js?version=2020012301"></script>
+    <script type="text/javascript" src="/js/crypto/sha256.js?version=2020012301"></script>
     <script type="text/javascript" src="/js/register.js?version=2020012301"></script>
-<#--    <script type="text/javascript" src="/js/crypto/sha256.js?version=2020012301"></script>-->
 </head>
 <body>
 <div class="sso-register">
@@ -30,7 +31,7 @@
             </div>
             <div class="sso-register-container">
                 验证码:<input type="text" name="validcode" placeholder="请输入验证码" minlength="6" maxlength="6">
-                <img class="validation-img" src="../img/captcha.png" title="看不清楚？点击换一张">
+                <img class="sso-validcode-img" src="/valid-code" title="看不清楚？点击换一张" alt="更换验证码" onclick="getRefreshCode()">
             </div>
         </form>
         <div>
