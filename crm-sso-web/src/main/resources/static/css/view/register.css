@@ -1,0 +1,88 @@
+.sso-register {
+    position: relative;
+    margin: 30px auto;
+    box-sizing: border-box;
+    width: 470px;
+    height: 600px;
+    background-color: #E6E6E6;
+    z-index: 100;
+}
+
+.sso-register-panel {
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 500px;
+}
+
+.sso-register-title {
+    text-align: center;
+    color: #62a8ea;
+}
+
+.sso-register-title h2 {
+    letter-spacing: 10px;
+}
+
+.sso-register-container {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 20px 0 10px;
+    padding-right: 30px;
+    text-align: right;
+    color: #62a8ea;
+}
+
+.sso-register-container input {
+    border: 1px solid white;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 80%;
+    height: 46px;
+    padding-left: 10px;
+    margin: 0 auto;
+    font-size: 14px;
+    outline: none;
+    color: #76838f;
+}
+.sso-register-remember{
+    margin: 10px 30px;
+}
+
+.sso-register-remember a{
+    float: right;
+    margin: auto 0;
+    font-size: 13px;
+    color: cornflowerblue;
+}
+
+.sso-register-button{
+    height: 50px;
+    width: 410px;
+    margin: 0 30px;
+    font-size: 30px;
+    color: #ffffff;
+    background-color: #62a8ea;
+    border: 2px solid #5290ea;
+}
+
+.sso-login-tip{
+    float: right;
+}
+
+.sso-login-tip span{
+    margin: auto 0;
+    font-size: 13px;
+    color: #a9a9a9;
+}
+
+.sso-login-tip a{
+    text-decoration: none;
+    margin: auto 0;
+    margin-right: 30px;
+    font-size: 13px;
+    color: #ff0000;
+}

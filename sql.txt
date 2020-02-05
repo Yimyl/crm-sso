@@ -1,0 +1,8 @@
+create table crm_sso_user(id int(15) unsigned NOT NULL auto_increment primary key,
+username varchar(20) NOT NULL,
+password varchar(40) NOT NULL,
+email varchar(30) NOT NULL,
+create_time datetime NOT NULL default now(),
+modify_time datetime NOT NULL default now(),
+UNIQUE 	key uni_idx_uname(username));
+

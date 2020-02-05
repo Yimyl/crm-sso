@@ -1,0 +1,81 @@
+.sso-findAccount {
+    position: relative;
+    margin: 30px auto;
+    box-sizing: border-box;
+    width: 480px;
+    height: 460px;
+    background-color: #E6E6E6;
+    z-index: 100;
+}
+
+.sso-findAccount-panel {
+    height: 380px;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.sso-findAccount-title {
+    text-align: center;
+    color: #62a8ea;
+}
+
+.sso-findAccount-title h2 {
+    letter-spacing: 10px;
+}
+
+.sso-findAccount-container {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 20px 0 10px;
+    padding-right: 30px;
+    text-align: right;
+}
+
+.sso-findAccount-container input {
+    border: 1px solid white;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 80%;
+    height: 46px;
+    padding-left: 10px;
+    margin: 0 auto;
+    font-size: 14px;
+    outline: none;
+    color: #76838f;
+}
+
+.sso-findAccount-container button{
+    margin-top: 10px;
+    text-align: center;
+    width: 130px;
+    height: 50px;
+    background-color: #62a8ea;
+    color: #ffffff;
+    border: 2px solid #5290ea;
+}
+
+.sso-findAccount-button{
+    height: 50px;
+    width: 410px;
+    margin: 0 30px;
+    font-size: 20px;
+    color: #ffffff;
+    background-color: #62a8ea;
+    border: 2px solid #5290ea;
+}
+
+.sso-login-tip{
+    float: right;
+}
+
+.sso-login-tip a{
+    text-decoration: none;
+    margin: auto 0;
+    margin-right: 30px;
+    font-size: 13px;
+    color: #ff0000;
+}
