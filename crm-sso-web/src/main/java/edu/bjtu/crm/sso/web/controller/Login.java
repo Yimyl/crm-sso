@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.awt.image.BufferedImage;
 import java.io.OutputStream;
 import java.util.Map;
@@ -29,13 +26,16 @@ public class Login {
     @RequestMapping("/login")
     public String login(HttpServletRequest request, HttpServletResponse response, Model model) {
         Cookie[] cookies = request.getCookies();
-        for (int i = 0; i < cookies.length; i++) {
+        if (cookies != null) {
+            for (int i = 0; i < cookies.length; i++) {
 //            System.out.println(cookies[i].getName() +" " +cookies[i].getValue());
-            if(cookies[i].getName() == LoginInfo.TOKEN) {
-                model.addAttribute("username", cookies[i].getValue());
-                return "home";
+                if(cookies[i].getName() == LoginInfo.TOKEN) {
+                    model.addAttribute("username", cookies[i].getValue());
+                    return "home";
+                }
             }
         }
+
         HttpSession session = request.getSession();
         if (session.getAttribute(LoginInfo.VALIDCODE) == null){
             model.addAttribute(LoginInfo.FIRST_LOGIN, true);
@@ -50,7 +50,7 @@ public class Login {
     public String doLogin(HttpServletRequest request, HttpServletResponse response, String username, String password, String validcode, String remember) {
         System.out.println(username + "abc" + password);
         HttpSession session = request.getSession();
-        System.out.println(userMapper.findUserByIdAndName("zzj", "hh"));
+
         //校验验证码
         System.out.println((String)session.getAttribute(LoginInfo.VALIDCODE));
         System.out.println(validcode);
@@ -60,7 +60,7 @@ public class Login {
             return LoginStatusEnum.ValidcodeError.getValue();
         }
         //验证账号
-        if (userMapper.findUserByIdAndName("zzj", "hh") == 1) {
+        if (userMapper.findUserByIdAndName(username, password) == 1) {
             session.removeAttribute(LoginInfo.VALIDCODE);
             //给token
             Cookie cookie = new Cookie(LoginInfo.TOKEN, username);
@@ -123,6 +123,9 @@ public class Login {
 
         //将图片输出给浏览器
         BufferedImage image = (BufferedImage) request.getSession().getAttribute(LoginInfo.VALIDCODE_IMAGE);
+        if (image == null) {
+            return;
+        }
         response.setContentType("image/png");
         OutputStream os = response.getOutputStream();
         ImageIO.write(image, "png", os);
