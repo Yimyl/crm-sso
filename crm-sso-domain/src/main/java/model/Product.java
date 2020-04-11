@@ -1,8 +1,9 @@
 package model;
 
 public class Product {
-    private long productId;
-    private String productName;
-    private double priceIn;
-    private double priceOut;
+    private long id;
+    private String name;
+    private double cost;
+    private double price;
+    private double commissionRate;
 }

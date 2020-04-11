@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class UserInfo {
     private long id;
-    private long userId;
+    private String username;
     private String name;
     private String position;
     private boolean isMng;
