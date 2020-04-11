@@ -14,6 +14,6 @@ public interface UserMapper {
     int addUser(@Param("username") String username,@Param("password") String password);
 
 
-    @Select("SELECT count(1) FROM crm_sso_user WHERE username = #{username} and password = sha(#{password})")
+    @Select("SELECT count(1) FROM crm_sso_user WHERE username = #{username} and password = sha(#{password}) and is_delete = false")
     int findUserByIdAndName(@Param("username") String username,@Param("password") String password);
 }

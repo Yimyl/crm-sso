@@ -12,7 +12,6 @@ public class UserLocal {
         USER_INFO.set(userInfo);
     }
 
-
     public static UserInfo get() {
         return USER_INFO.get();
     }
@@ -25,15 +24,13 @@ public class UserLocal {
         return USER_INFO.get().getName();
     }
 
-    public static long getUserId() {
-        return USER_INFO.get().getUserId();
+    public static String getUsername() {
+        return USER_INFO.get().getUsername();
     }
-
 
     public static String getPhone() {
         return USER_INFO.get().getPhone();
     }
-
 
     public static String getEmail() {
         return USER_INFO.get().getEmail();

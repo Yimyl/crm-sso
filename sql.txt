@@ -1,71 +1,71 @@
 用户表
 create table crm_sso_user(
-id int(15) unsigned NOT NULL auto_increment primary key,
-username varchar(30) NOT NULL,
-password varchar(40) NOT NULL,
-create_time datetime NOT NULL default now(),
-modify_time datetime NOT NULL default now(),
-is_delete tinyint(1) NOT NULL default 0;
+id int(15) unsigned NOT NULL auto_increment primary key COMMENT 'id',
+username varchar(30) NOT NULL COMMENT '用户名称',
+password varchar(40) NOT NULL COMMENT '用户密码',
+create_time datetime NOT NULL default now() COMMENT '创建时间',
+modify_time datetime NOT NULL default now() COMMENT '修改时间',
+is_delete tinyint(1) NOT NULL default 0 COMMENT '是否已删除';
 UNIQUE key uni_idx_uname(username)
 );
 
 
 用户信息表
 create table crm_sso_userinfo(
-id int(15) unsigned NOT NULL auto_increment primary key,
-username varchar(30) NOT NULL,
-name varchar(30) NOT NULL,
-position varchar(30) NOT NULL,
-is_mng tinyint(1) NOt NULL default 0,
-email varchar(30) NOT NULL,
-phone varchar(30) NOT NULL,
-token varchar(40) NOT NULL,
-create_time datetime NOT NULL default now(),
-modify_time datetime NOT NULL default now(),
-is_delete tinyint(1) NOT NULL default 0,
+id int(15) unsigned NOT NULL auto_increment primary key COMMENT 'id',
+username varchar(30) NOT NULL COMMENT '用户名称',
+name varchar(30) NOT NULL COMMENT '姓名',
+position varchar(30) NOT NULL COMMENT '职位',
+is_mng tinyint(1) NOt NULL default 0 COMMENT '是否管理员身份',
+email varchar(30) NOT NULL COMMENT '邮箱',
+phone varchar(30) NOT NULL COMMENT '手机号码',
+token varchar(40) NOT NULL COMMENT 'token',
+create_time datetime NOT NULL default now() COMMENT '创建时间',
+modify_time datetime NOT NULL default now() COMMENT '修改时间',
+is_delete tinyint(1) NOT NULL default 0 COMMENT '是否已删除',
 FOREIGN key (username) references crm_sso_user(username)
 );
 
 客户表
 create table crm_sso_consumer(
-id int(15) unsigned NOT NULL auto_increment primary key,
-phone varchar(30) NOT NULL unique,
-name varchar(30) NOT NULL,
-grade tinyint(2) NOT NULL,
-email varchar(30) NOT NULL,
-balance decimal(10,2) NOT NULL default 0,
-consume decimal(15,2) NOT NULL default 0,
-create_time datetime NOT NULL default now(),
-modify_time datetime NOT NULL default now(),
-is_delete tinyint(1) NOT NULL default 0,
+id int(15) unsigned NOT NULL auto_increment primary key COMMENT 'id',
+phone varchar(30) NOT NULL unique COMMENT '手机号码',
+name varchar(30) NOT NULL COMMENT '姓名',
+vip_grade tinyint(2) NOT NULL COMMENT 'vip级别',
+email varchar(30) NOT NULL COMMENT '邮箱',
+balance decimal(10,2) NOT NULL default 0 COMMENT '余额',
+consume decimal(15,2) NOT NULL default 0 COMMENT '累计消费',
+create_time datetime NOT NULL default now() COMMENT '创建时间',
+modify_time datetime NOT NULL default now() COMMENT '修改时间',
+is_delete tinyint(1) NOT NULL default 0 COMMENT '是否已删除',
 UNIQUE key uni_idx_phone(phone)
 );
 
 产品表
 create table crm_sso_product(
-id int(15) unsigned NOT NULL auto_increment primary key,
-name varchar(30) NOT NULL,
-cost decimal(10,2) NOT NULL default 0,
-price decimal(10,2) NOT NULL default 0,
-commissionRate decimal(3,2) NOT NULL default now(),
-create_time datetime NOT NULL default now(),
-modify_time datetime NOT NULL default now(),
-is_delete tinyint(1) NOT NULL default 0,
+id int(15) unsigned NOT NULL auto_increment primary key COMMENT 'id',
+name varchar(30) NOT NULL COMMENT '名称',
+cost decimal(10,2) NOT NULL default 0 COMMENT '成本',
+price decimal(10,2) NOT NULL default 0 COMMENT '价格',
+commission_rate decimal(3,2) NOT NULL default 0 COMMENT '提成',
+create_time datetime NOT NULL default now() COMMENT '创建时间',
+modify_time datetime NOT NULL default now() COMMENT '修改时间',
+is_delete tinyint(1) NOT NULL default 0 COMMENT '是否已删除',
 UNIQUE key uni_idx_name(name)
 );
 
 消费记录表
 create table crm_sso_record(
-id int(20) unsigned NOT NULL auto_increment primary key,
-user_username varchar(30) NOT NULL,
-consumer_phone varchar(30) NOT NULL,
-product_name varchar(30) NOT NULL,
-price decimal(6,2) NOT NULL,
-discount decimal(3,2) NOT NULL,
-real_price decimal(6,2) NOT NULL,
-commissionRate decimal(5,2) NOT NULL default now(),
-create_time datetime NOT NULL default now(),
-is_delete tinyint(1) NOT NULL default 0,
+id int(20) unsigned NOT NULL auto_increment primary key COMMENT 'id',
+user_username varchar(30) NOT NULL COMMENT '用户名称',
+consumer_phone varchar(30) NOT NULL COMMENT '客户手机',
+product_name varchar(30) NOT NULL COMMENT '产品名称',
+price decimal(6,2) NOT NULL COMMENT '价格',
+discount decimal(3,2) NOT NULL COMMENT '折扣',
+real_price decimal(6,2) NOT NULL COMMENT '实际价格',
+commission_rate decimal(5,2) NOT NULL default 0 COMMENT '提成',
+create_time datetime NOT NULL default now() COMMENT '创建时间',
+is_delete tinyint(1) NOT NULL default 0 COMMENT '是否已删除',
 key idx_time(create_time),
 Foreign key (user_username) references crm_sso_user(username),
 Foreign key (consumer_phone) references crm_sso_consumer(phone),
@@ -75,46 +75,46 @@ Foreign key (product_name) references crm_sso_product(name)
 消费记录日表
 用户日表
 create table crm_sso_record_day_user(
-id int(20) unsigned NOT NULL auto_increment primary key,
-user_username varchar(30) NOT NULL,
-price decimal(6,2) NOT NULL,
-income decimal(6,2) NOT NULL,
-day tinyint(2) NOT NULL,
-month tinyint(2) NOT NULL,
-year tinyint(4) NOT NULL,
-create_time datetime NOT NULL default now(),
-modify_time datetime NOT NULL default now(),
-is_delete tinyint(1) NOT NULL default 0,
+id int(20) unsigned NOT NULL auto_increment primary key COMMENT 'id',
+user_username varchar(30) NOT NULL COMMENT '用户名称',
+price decimal(6,2) NOT NULL COMMENT '价格',
+income decimal(6,2) NOT NULL COMMENT '实际收入',
+day tinyint(2) NOT NULL COMMENT '日期',
+month tinyint(2) NOT NULL COMMENT '月份',
+year tinyint(4) NOT NULL COMMENT '年份',
+create_time datetime NOT NULL default now() COMMENT '创建时间',
+modify_time datetime NOT NULL default now() COMMENT '修改时间',
+is_delete tinyint(1) NOT NULL default 0 COMMENT '是否已删除',
 UNIQUE key uni_idx_time(year,month,day,user_username),
-Foreign key (user_username) references crm_sso_user(username),
+Foreign key (user_username) references crm_sso_user(username)
 );
 
 客户日表
 create table crm_sso_record_day_consumer(
-id int(20) unsigned NOT NULL auto_increment primary key,
-consumer_phone varchar(30) NOT NULL,
-price decimal(6,2) NOT NULL,
-day tinyint(2) NOT NULL,
-month tinyint(2) NOT NULL,
-year tinyint(4) NOT NULL,
-create_time datetime NOT NULL default now(),
-modify_time datetime NOT NULL default now(),
-is_delete tinyint(1) NOT NULL default 0,
+id int(20) unsigned NOT NULL auto_increment primary key COMMENT 'id',
+consumer_phone varchar(30) NOT NULL COMMENT '客户手机',
+price decimal(6,2) NOT NULL COMMENT '价格',
+day tinyint(2) NOT NULL COMMENT '日期',
+month tinyint(2) NOT NULL COMMENT '月份',
+year tinyint(4) NOT NULL COMMENT '年份',
+create_time datetime NOT NULL default now() COMMENT '创建时间',
+modify_time datetime NOT NULL default now() COMMENT '修改时间',
+is_delete tinyint(1) NOT NULL default 0 COMMENT '是否已删除',
 UNIQUE key uni_idx_time(year,month,day,consumer_phone),
-Foreign key (consumer_phone) references crm_sso_consumer(phone),
+Foreign key (consumer_phone) references crm_sso_consumer(phone)
 );
 
 产品日表
 create table crm_sso_record_day_product(
-id int(20) unsigned NOT NULL auto_increment primary key,
-product_name varchar(30) NOT NULL,
-price decimal(6,2) NOT NULL,
-day tinyint(2) NOT NULL,
-month tinyint(2) NOT NULL,
-year tinyint(4) NOT NULL,
-create_time datetime NOT NULL default now(),
-modify_time datetime NOT NULL default now(),
-is_delete tinyint(1) NOT NULL default 0,
+id int(20) unsigned NOT NULL auto_increment primary key COMMENT 'id',
+product_name varchar(30) NOT NULL COMMENT '产品名称',
+price decimal(6,2) NOT NULL COMMENT '价格',
+day tinyint(2) NOT NULL COMMENT '日期',
+month tinyint(2) NOT NULL COMMENT '月份',
+year tinyint(4) NOT NULL COMMENT '年份',
+create_time datetime NOT NULL default now() COMMENT '创建时间',
+modify_time datetime NOT NULL default now() COMMENT '修改时间',
+is_delete tinyint(1) NOT NULL default 0 COMMENT '是否已删除',
 UNIQUE key uni_idx_time(year,month,day,product_name),
 Foreign key (product_name) references crm_sso_product(name)
 );
@@ -122,84 +122,84 @@ Foreign key (product_name) references crm_sso_product(name)
 消费记录月表
 用户月表
 create table crm_sso_record_month_user(
-id int(20) unsigned NOT NULL auto_increment primary key,
-user_username varchar(30) NOT NULL,
-price decimal(8,2) NOT NULL,
-income decimal(8,2) NOT NULL,
-month tinyint(2) NOT NULL,
-year tinyint(4) NOT NULL,
-create_time datetime NOT NULL default now(),
-modify_time datetime NOT NULL default now(),
-is_delete tinyint(1) NOT NULL default 0,
-UNIQUE key uni_idx_time(year,month,day,user_username),
-Foreign key (user_username) references crm_sso_user(username),
+id int(20) unsigned NOT NULL auto_increment primary key COMMENT 'id',
+user_username varchar(30) NOT NULL COMMENT '用户名称',
+price decimal(8,2) NOT NULL COMMENT '价格',
+income decimal(8,2) NOT NULL COMMENT '实际收入',
+month tinyint(2) NOT NULL COMMENT '月份',
+year tinyint(4) NOT NULL COMMENT '年份',
+create_time datetime NOT NULL default now() COMMENT '创建时间',
+modify_time datetime NOT NULL default now() COMMENT '修改时间',
+is_delete tinyint(1) NOT NULL default 0 COMMENT '是否已删除',
+UNIQUE key uni_idx_time(year,month,user_username),
+Foreign key (user_username) references crm_sso_user(username)
 );
 
 客户月表
 create table crm_sso_record_month_consumer(
-id int(20) unsigned NOT NULL auto_increment primary key,
-consumer_phone varchar(30) NOT NULL,
-price decimal(8,2) NOT NULL,
-month tinyint(2) NOT NULL,
-year tinyint(4) NOT NULL,
-create_time datetime NOT NULL default now(),
-modify_time datetime NOT NULL default now(),
-is_delete tinyint(1) NOT NULL default 0,
-UNIQUE key uni_idx_time(year,month,day,consumer_phone),
-Foreign key (consumer_phone) references crm_sso_consumer(phone),
+id int(20) unsigned NOT NULL auto_increment primary key COMMENT 'id',
+consumer_phone varchar(30) NOT NULL COMMENT '客户手机',
+price decimal(8,2) NOT NULL COMMENT '价格',
+month tinyint(2) NOT NULL COMMENT '月份',
+year tinyint(4) NOT NULL COMMENT '年份',
+create_time datetime NOT NULL default now() COMMENT '创建时间',
+modify_time datetime NOT NULL default now() COMMENT '修改时间',
+is_delete tinyint(1) NOT NULL default 0 COMMENT '是否已删除',
+UNIQUE key uni_idx_time(year,month,consumer_phone),
+Foreign key (consumer_phone) references crm_sso_consumer(phone)
 );
 
 产品月表
 create table crm_sso_record_month_product(
-id int(20) unsigned NOT NULL auto_increment primary key,
-product_name varchar(30) NOT NULL,
-price decimal(8,2) NOT NULL,
-month tinyint(2) NOT NULL,
-year tinyint(4) NOT NULL,
-create_time datetime NOT NULL default now(),
-modify_time datetime NOT NULL default now(),
-is_delete tinyint(1) NOT NULL default 0,
-UNIQUE key uni_idx_time(year,month,day,product_name),
+id int(20) unsigned NOT NULL auto_increment primary key COMMENT 'id',
+product_name varchar(30) NOT NULL COMMENT '产品名称',
+price decimal(8,2) NOT NULL COMMENT '价格',
+month tinyint(2) NOT NULL COMMENT '月份',
+year tinyint(4) NOT NULL COMMENT '年份',
+create_time datetime NOT NULL default now() COMMENT '创建时间',
+modify_time datetime NOT NULL default now() COMMENT '修改时间',
+is_delete tinyint(1) NOT NULL default 0 COMMENT '是否已删除',
+UNIQUE key uni_idx_time(year,month,product_name),
 Foreign key (product_name) references crm_sso_product(name)
 );
 
 消费记录年表
 用户年表
 create table crm_sso_record_year_user(
-id int(20) unsigned NOT NULL auto_increment primary key,
-user_username varchar(30) NOT NULL,
-price decimal(10,2) NOT NULL,
-income decimal(10,2) NOT NULL,
-year tinyint(4) NOT NULL,
-create_time datetime NOT NULL default now(),
-modify_time datetime NOT NULL default now(),
-is_delete tinyint(1) NOT NULL default 0,
-UNIQUE key uni_idx_time(year,month,day,user_username),
-Foreign key (user_username) references crm_sso_user(username),
+id int(20) unsigned NOT NULL auto_increment primary key COMMENT 'id',
+user_username varchar(30) NOT NULL COMMENT '用户名称',
+price decimal(10,2) NOT NULL COMMENT '价格',
+income decimal(10,2) NOT NULL COMMENT '实际收入',
+year tinyint(4) NOT NULL COMMENT '年份',
+create_time datetime NOT NULL default now() COMMENT '创建时间',
+modify_time datetime NOT NULL default now() COMMENT '修改时间',
+is_delete tinyint(1) NOT NULL default 0 COMMENT '是否已删除',
+UNIQUE key uni_idx_time(year,user_username),
+Foreign key (user_username) references crm_sso_user(username)
 );
 
 客户年表
 create table crm_sso_record_year_consumer(
-id int(20) unsigned NOT NULL auto_increment primary key,
-consumer_phone varchar(30) NOT NULL,
-price decimal(10,2) NOT NULL,
-year tinyint(4) NOT NULL,
-create_time datetime NOT NULL default now(),
-modify_time datetime NOT NULL default now(),
-is_delete tinyint(1) NOT NULL default 0,
-UNIQUE key uni_idx_time(year,month,day,consumer_phone),
-Foreign key (consumer_phone) references crm_sso_consumer(phone),
+id int(20) unsigned NOT NULL auto_increment primary key COMMENT 'id',
+consumer_phone varchar(30) NOT NULL COMMENT '客户手机',
+price decimal(10,2) NOT NULL COMMENT '价格',
+year tinyint(4) NOT NULL COMMENT '年份',
+create_time datetime NOT NULL default now() COMMENT '创建时间',
+modify_time datetime NOT NULL default now() COMMENT '修改时间',
+is_delete tinyint(1) NOT NULL default 0 COMMENT '是否已删除',
+UNIQUE key uni_idx_time(year,consumer_phone),
+Foreign key (consumer_phone) references crm_sso_consumer(phone)
 );
 
 产品年表
 create table crm_sso_record_year_product(
-id int(20) unsigned NOT NULL auto_increment primary key,
-product_name varchar(30) NOT NULL,
-price decimal(10,2) NOT NULL,
-year tinyint(4) NOT NULL,
-create_time datetime NOT NULL default now(),
-modify_time datetime NOT NULL default now(),
-is_delete tinyint(1) NOT NULL default 0,
-UNIQUE key uni_idx_time(year,month,day,product_name),
+id int(20) unsigned NOT NULL auto_increment primary key COMMENT 'id',
+product_name varchar(30) NOT NULL COMMENT '产品名称',
+price decimal(10,2) NOT NULL COMMENT '价格',
+year tinyint(4) NOT NULL COMMENT '年份',
+create_time datetime NOT NULL default now() COMMENT '创建时间',
+modify_time datetime NOT NULL default now() COMMENT '修改时间',
+is_delete tinyint(1) NOT NULL default 0 COMMENT '是否已删除',
+UNIQUE key uni_idx_time(year,product_name),
 Foreign key (product_name) references crm_sso_product(name)
 );
