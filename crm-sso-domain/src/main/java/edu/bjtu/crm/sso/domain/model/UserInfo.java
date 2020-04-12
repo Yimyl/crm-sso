@@ -1,4 +1,4 @@
-package model;
+package edu.bjtu.crm.sso.domain.model;
 
 import lombok.Data;
 
@@ -7,6 +7,7 @@ public class UserInfo {
     private long id;
     private String username;
     private String name;
+    private String pinyin;
     private String position;
     private boolean isMng;
     private String email;

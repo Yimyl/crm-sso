@@ -1,4 +1,4 @@
-package model;
+package edu.bjtu.crm.sso.domain.model;
 
 public class Customer {
     private long id;

@@ -1,6 +1,8 @@
 package edu.bjtu.crm.sso.web.controller;
 
 import edu.bjtu.crm.sso.dao.mapper.UserMapper;
+import edu.bjtu.crm.sso.domain.model.User;
+import edu.bjtu.crm.sso.service.UserMngService;
 import edu.bjtu.crm.sso.web.constant.LoginInfo;
 import edu.bjtu.crm.sso.web.constant.LoginStatusEnum;
 import edu.bjtu.crm.sso.web.constant.RegisterStatusEnum;
@@ -21,7 +23,7 @@ import java.util.Map;
 public class Login {
 
     @Resource
-    private UserMapper userMapper;
+    private UserMngService userMngService;
 
     @RequestMapping("/login")
     public String login(HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -50,7 +52,9 @@ public class Login {
     public String doLogin(HttpServletRequest request, HttpServletResponse response, String username, String password, String validcode, String remember) {
         System.out.println(username + "abc" + password);
         HttpSession session = request.getSession();
-
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
         //校验验证码
         System.out.println((String)session.getAttribute(LoginInfo.VALIDCODE));
         System.out.println(validcode);
@@ -60,7 +64,7 @@ public class Login {
             return LoginStatusEnum.ValidcodeError.getValue();
         }
         //验证账号
-        if (userMapper.findUserByIdAndName(username, password) == 1) {
+        if (userMngService.login(user) == 1) {
             session.removeAttribute(LoginInfo.VALIDCODE);
             //给token
             Cookie cookie = new Cookie(LoginInfo.TOKEN, username);

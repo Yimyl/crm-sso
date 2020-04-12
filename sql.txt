@@ -5,7 +5,7 @@ username varchar(30) NOT NULL COMMENT '用户名称',
 password varchar(40) NOT NULL COMMENT '用户密码',
 create_time datetime NOT NULL default now() COMMENT '创建时间',
 modify_time datetime NOT NULL default now() COMMENT '修改时间',
-is_delete tinyint(1) NOT NULL default 0 COMMENT '是否已删除';
+is_delete tinyint(1) NOT NULL default 0 COMMENT '是否已删除'，
 UNIQUE key uni_idx_uname(username)
 );
 
@@ -15,6 +15,7 @@ create table crm_sso_userinfo(
 id int(15) unsigned NOT NULL auto_increment primary key COMMENT 'id',
 username varchar(30) NOT NULL COMMENT '用户名称',
 name varchar(30) NOT NULL COMMENT '姓名',
+pinyin varchar(40) NOT NULL COMMENT '姓名拼音',
 position varchar(30) NOT NULL COMMENT '职位',
 is_mng tinyint(1) NOt NULL default 0 COMMENT '是否管理员身份',
 email varchar(30) NOT NULL COMMENT '邮箱',

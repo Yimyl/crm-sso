@@ -1,6 +1,6 @@
 package edu.bjtu.crm.sso.web.util;
 
-import model.UserInfo;
+import edu.bjtu.crm.sso.domain.model.UserInfo;
 
 public class UserLocal {
 
