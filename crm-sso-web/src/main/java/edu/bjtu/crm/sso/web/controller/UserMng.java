@@ -11,7 +11,28 @@ public class UserMng {
     @RequestMapping("/userMng")
     public String userMng(Model model) {
         UserInfo userInfo = UserLocal.get();
-        model.addAttribute("isMng",userInfo.getIsMng());
+        model.addAttribute("userinfo",userInfo);
+        return "userMng";
+    }
+
+    @RequestMapping("/userMng/id/#{id}")
+    public String userMngQueryById(Model model) {
+        UserInfo userInfo = UserLocal.get();
+        model.addAttribute("userinfo",userInfo);
+        return "userMng";
+    }
+
+    @RequestMapping("/userMng/username/#{username}")
+    public String userMngQueryByUsername(Model model) {
+        UserInfo userInfo = UserLocal.get();
+        model.addAttribute("userinfo",userInfo);
+        return "userMng";
+    }
+
+    @RequestMapping("/userMng/userAdd")
+    public String userMngUserAdd(Model model) {
+        UserInfo userInfo = UserLocal.get();
+        model.addAttribute("userinfo",userInfo);
         return "userMng";
     }
 }

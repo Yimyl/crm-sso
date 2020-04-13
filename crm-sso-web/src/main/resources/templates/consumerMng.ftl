@@ -11,10 +11,8 @@
     欢迎${username}
 </div>
 <#include "top.ftl">
-</body>
 <button>客户查询</button>
 <button>添加客户</button>
 <button>充值</button>
-
-
+</body>
 </html>

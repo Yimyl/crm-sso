@@ -11,10 +11,9 @@
     欢迎${username}
 </div>
 <#include "top.ftl">
-</body>
+<button>添加交易记录</button>
 <button>用户业绩统计</button>
 <button>产品业绩统计</button>
 <button>客户消费统计</button>
-
-
+</body>
 </html>
