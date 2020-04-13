@@ -9,4 +9,6 @@ public interface UserMngService {
     int login(User user);
 
     UserInfo findUserInfoByUsername(String username);
+
+    UserInfo findUserInfoById(long id);
 }

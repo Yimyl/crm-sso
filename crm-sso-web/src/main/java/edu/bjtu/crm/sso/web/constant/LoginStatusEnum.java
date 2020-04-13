@@ -10,7 +10,8 @@ package edu.bjtu.crm.sso.web.constant;
 public enum LoginStatusEnum {
     Success("success"),
     ValidcodeError("validcodeError"),
-    UsernamepasswordError("usernamepasswordError");
+    UsernamepasswordError("usernamepasswordError"),
+    NotMng("notMng");
 
     private String value;
     LoginStatusEnum (String value) {

@@ -10,7 +10,8 @@ public interface UserInfoMapper {
     //todo 密码加密保护 token   sha
     String userinfo = "id, username";
 
-    @Insert("INSERT INTO crm_sso_userinfo (username, password) value (#{username}, sha(#{password}))")
+    @Insert("INSERT INTO crm_sso_userinfo (username,name,pinyin,position,is_mng,email,phone) " +
+            "VALUE (#{username}, #{name}, #{pinyin}, #{position}, #{isMng}, #{email}, #{phone})")
     int addUserInfo(UserInfo userInfo);
 
     @Select("SELECT id,username,name,pinyin,position,is_mng as isMng,email,phone,token " +
@@ -18,6 +19,12 @@ public interface UserInfoMapper {
             "WHERE username = #{username} AND " +
             "is_delete = false")
     UserInfo findUserInfoByUsername(String username);
+
+    @Select("SELECT id,username,name,pinyin,position,is_mng as isMng,email,phone,token " +
+            "FROM crm_sso_userinfo " +
+            "WHERE id = #{id} AND " +
+            "is_delete = false")
+    UserInfo findUserInfoById(long id);
 
     @Select("SELECT count(1) FROM crm_sso_userinfo WHERE pinyin = #{pinyin}")
     int findNumOfPinyin(String pinyin);

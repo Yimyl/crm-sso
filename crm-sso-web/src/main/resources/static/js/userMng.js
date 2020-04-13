@@ -12,6 +12,11 @@ function userinfoModify() {
     $('.user_info_modify').removeClass("displayNone")
 }
 
+function passwordModify() {
+    $('.myform').each(function(){$(this).addClass("displayNone")});
+    $('.user_info_password_modify').removeClass("displayNone")
+}
+
 function userinfoSearch() {
     $('.myform').each(function(){$(this).addClass("displayNone")});
     $('.user_info_search').removeClass("displayNone")
@@ -68,8 +73,8 @@ function userAddSubmit() {
         success: function (data) {
             console.log(data);
             if (data.code == 200) {
-                alert("保存成功,用户账号为" + data.username);
-                window.location.href = "/userMng/";
+                alert("保存成功,用户账号为" + data.result.username);
+                window.location.href = "/userMng/username/" + data.result.username;
             } else {
                 alert("保存失败," + data.message);
             }
@@ -81,3 +86,43 @@ function userAddSubmit() {
     });
 }
 
+function userinfoSearchSubmit() {
+    var id = $('#search_id').val();
+    var username = $('#search_username').val();
+    var name = $('#search_name').val();
+    var position = $('#search_position').val();
+    var isMng = $('#search_isMng').val();
+    var email = $('#search_email').val();
+    var phone = $('#search_phone').val();
+
+    var param = {
+        id: id,
+        username: username,
+        name: name,
+        position: position,
+        isMng: isMng,
+        email: email,
+        phone: phone
+    };
+
+    $.ajax({
+        type: "POST",
+        url: "/userMng/search",
+        data: JSON.stringify(param),
+        dataType: "json",
+        contentType: "json/application",
+        async: false,
+        success: function (data) {
+            console.log(data);
+            if (data.code == 200) {
+
+            } else {
+                alert("查询失败," + data.message);
+            }
+        },
+        error: function (error) {
+            alert("保存失败,服务器异常");
+            // $("#saveButton").removeAttr("disabled");
+        }
+    });
+}

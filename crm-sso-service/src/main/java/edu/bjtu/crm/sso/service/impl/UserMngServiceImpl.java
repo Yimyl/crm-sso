@@ -26,8 +26,8 @@ public class UserMngServiceImpl implements UserMngService {
             userInfo.setUsername(userInfo.getPinyin() + (num + 1));
         }
         user.setUsername(userInfo.getUsername());
-        userMapper.addUser(user);
         userInfoMapper.addUserInfo(userInfo);
+        userMapper.addUser(user);
         return userInfo.getUsername();
     }
 
@@ -41,4 +41,8 @@ public class UserMngServiceImpl implements UserMngService {
         return userInfoMapper.findUserInfoByUsername(username);
     }
 
+    @Override
+    public UserInfo findUserInfoById(long id) {
+        return userInfoMapper.findUserInfoById(id);
+    }
 }

@@ -28,6 +28,10 @@ public class UserLocal {
         return USER_INFO.get().getUsername();
     }
 
+    public static int getIsMng() {
+        return USER_INFO.get().getIsMng();
+    }
+
     public static String getPhone() {
         return USER_INFO.get().getPhone();
     }
