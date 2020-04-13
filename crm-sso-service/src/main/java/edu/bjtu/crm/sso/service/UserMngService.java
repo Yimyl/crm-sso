@@ -7,4 +7,6 @@ public interface UserMngService {
     String addUser(User user, UserInfo userInfo);
 
     int login(User user);
+
+    UserInfo findUserInfoByUsername(String username);
 }

@@ -9,7 +9,7 @@ public class UserInfo {
     private String name;
     private String pinyin;
     private String position;
-    private boolean isMng;
+    private int isMng;
     private String email;
     private String phone;
     private String token;

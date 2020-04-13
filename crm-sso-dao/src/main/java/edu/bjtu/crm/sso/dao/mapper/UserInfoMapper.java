@@ -3,7 +3,6 @@ package edu.bjtu.crm.sso.dao.mapper;
 import edu.bjtu.crm.sso.domain.model.UserInfo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 @Mapper
@@ -14,9 +13,11 @@ public interface UserInfoMapper {
     @Insert("INSERT INTO crm_sso_userinfo (username, password) value (#{username}, sha(#{password}))")
     int addUserInfo(UserInfo userInfo);
 
-
-    @Select("SELECT count(1) FROM crm_sso_userinfo WHERE username = #{username} AND is_delete = false")
-    UserInfo findUserInfoByUsername(@Param("username") String username);
+    @Select("SELECT id,username,name,pinyin,position,is_mng as isMng,email,phone,token " +
+            "FROM crm_sso_userinfo " +
+            "WHERE username = #{username} AND " +
+            "is_delete = false")
+    UserInfo findUserInfoByUsername(String username);
 
     @Select("SELECT count(1) FROM crm_sso_userinfo WHERE pinyin = #{pinyin}")
     int findNumOfPinyin(String pinyin);

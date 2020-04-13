@@ -19,8 +19,9 @@
     <dependencies>
         <dependency>
             <groupId>edu.bjtu</groupId>
-            <artifactId>crm-sso-dao</artifactId>
+            <artifactId>crm-sso-service</artifactId>
             <version>1.0.0-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>edu.bjtu</groupId>
@@ -63,12 +64,14 @@
             <artifactId>commons-codec</artifactId>
         </dependency>
         <dependency>
-            <groupId>edu.bjtu</groupId>
-            <artifactId>crm-sso-service</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-            <scope>compile</scope>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.68</version>
+        </dependency>
     </dependencies>
 
 </project>

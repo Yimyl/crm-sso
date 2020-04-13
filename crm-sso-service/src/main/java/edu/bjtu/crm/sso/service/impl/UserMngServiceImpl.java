@@ -35,4 +35,10 @@ public class UserMngServiceImpl implements UserMngService {
     public int login(User user) {
         return userMapper.findUserByIdAndName(user);
     }
+
+    @Override
+    public UserInfo findUserInfoByUsername(String username) {
+        return userInfoMapper.findUserInfoByUsername(username);
+    }
+
 }

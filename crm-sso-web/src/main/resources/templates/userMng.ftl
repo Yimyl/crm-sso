@@ -64,11 +64,13 @@
 </div>
 <div class="user_add">
     <div>姓名:<input type="text"></div>
-    <div>手机:<input type="text"></div>
+    <div>拼音:<input type="text"></div>
     <div>初始密码:<input type="password"></div>
+    <div>重复密码:<input type="password"></div>
     <div>职位:<input type="text"></div>
     <div>管理员身份:<input type="text"></div>
     <div>邮箱:<input type="text"></div>
+    <div>手机:<input type="text"></div>
     <button>添加</button>
 </div>
 </html>

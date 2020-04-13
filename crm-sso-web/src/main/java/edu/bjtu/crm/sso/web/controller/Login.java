@@ -1,11 +1,13 @@
 package edu.bjtu.crm.sso.web.controller;
 
-import edu.bjtu.crm.sso.dao.mapper.UserMapper;
+import com.alibaba.fastjson.JSON;
 import edu.bjtu.crm.sso.domain.model.User;
+import edu.bjtu.crm.sso.domain.model.UserInfo;
 import edu.bjtu.crm.sso.service.UserMngService;
 import edu.bjtu.crm.sso.web.constant.LoginInfo;
 import edu.bjtu.crm.sso.web.constant.LoginStatusEnum;
 import edu.bjtu.crm.sso.web.constant.RegisterStatusEnum;
+import edu.bjtu.crm.sso.web.util.UserLocal;
 import edu.bjtu.crm.sso.web.util.ValidCodeUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -65,6 +67,9 @@ public class Login {
         }
         //验证账号
         if (userMngService.login(user) == 1) {
+            UserInfo userinfo = userMngService.findUserInfoByUsername(user.getUsername());
+            UserLocal.set(userinfo);
+            System.out.println(UserLocal.get());
             session.removeAttribute(LoginInfo.VALIDCODE);
             //给token
             Cookie cookie = new Cookie(LoginInfo.TOKEN, username);
