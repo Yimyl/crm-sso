@@ -1,0 +1,325 @@
+
+button, select, label, input, .label {
+  vertical-align: middle;
+}
+input, select, textarea {
+  box-sizing: border-box;
+}
+button, select {
+  text-transform: none;
+}
+input[type="text"], input[type="search"], input[type="password"], input[type="submit"], .medium select, .small select, textarea {
+  border: 1px solid #c2bdcc;
+  border-radius: 3px;
+  padding: 0 5px;
+}
+.form-group .form-inline input[type="text"], .form-group .form-inline input[type="password"], form-group .line input[type="password"], .form-group .form-inline input[type="submit"], .form-group .form-inline input[type="search"], .form-group .form-inline textarea, .form-group .form-inline select, .form-group .line input[type="text"], .form-group .line input[type="submit"], .form-group .line input[type="search"], .form-group .line textarea, .form-group .line select, .form-group .inline {
+  display: table-cell;
+}
+.text-center {
+  text-align: center;
+}
+/*form layout*/
+.span1{width:1%;}.span10{width:10%;}.span12{width:12%;}.span15{width:15%;}.span20{width:20%;}.span25{width:25%;}.span30{width:30%;}.span35{width:35%;}.span40{width:40%;}.span50{width:50%;}.form-group .span51{width:51%;}.form-group .span52{width:52%;}.span53{width:53%;}.span54{width:54%;}.span55{width:55%;}.span56{width:56%;}.span60{width:60%;}.span80{width:80%;}.span90{width:90%;}.span100{width:100%;}.span-fixed10{width:10px;}.span-fixed20{width:20px;}.span-fixed30{width:30px;}.span-fixed40{width:40px;}.span-fixed50{width:50px;}.span-fixed60{width:60px;}.span-fixed80{width:80px;}.span-fixed100{width:100px;}
+/*-- Table --*/
+table{width:100%; border-collapse:collapse; font-size:12px;}
+table .edit a{display:inline-block;width:100%;}
+thead{color:#999;font-weight:bold;}
+.fixes.basic{overflow-y: hidden;}
+.basic{width: 100%;}
+.basic>table>thead>tr>th, .basic>table>tbody>tr>th, .basic>table>tfoot>tr>th, .basic>table>thead>tr>td, .basic>table>tbody>tr>td, .basic>table>tfoot>tr>td {white-space: nowrap}
+.basic tbody tr:hover{background:#f1f2f7 ;}
+.basic tbody td.edit:hover a{background:url(../images/icon-edit.png) no-repeat right center;}
+.basic table thead,.basic table thead th/*,.basic table thead td:first-child,.basic table thead td:first-child*/{background:none}
+.basic td{border:1px solid #e7e4ed;padding:15px 10px;}
+.basic thead th,.basic tfoot td{border:1px solid #ddd; padding:10px;}
+.basic table{border:1px solid #ddd; color:#333;}
+.basic.small td,.basic.small th{border:1px solid #eee;padding:5px 8px;}
+.basic span.thumb,.simply span.thumb{display:inline-block;width:30px;height:30px;}
+.basic .thumb img,.simply span.thumb img{width:100%;}
+.basic tfoot{background:#f8f8f8;}
+.simply table{border:1px solid #f6f6f6;border:1px solid #d4d9e1;}
+.simply th,.simply td{padding:5px 10px;}
+.data-page{padding:16px 20px;}
+caption{text-align:left;}
+caption h5{height:40px;line-height:40px;font-size:12px;padding-left:20px;}
+caption h5 span{padding-right:10px;}
+.col-content caption h5{padding:0;}
+
+.table {
+  margin-bottom: 0!important;
+  border-bottom: 1px solid #ddd;
+  border-collapse: collapse!important;
+  border-radius: 1px;
+}
+
+/*-- Button --*/
+button{overflow:visible;cursor:pointer;}
+button, select{text-transform: none}
+button, html input[type=button], input[type=reset], input[type=submit]{-webkit-appearance: button;cursor: pointer}
+button[disabled], html input[disabled]{cursor: default}
+button::-moz-focus-inner, input::-moz-focus-inner{border:0;padding:0}
+.btn,button{display:inline-block;border-radius:3px;-ms-border-radius:3px;-moz-border-radius:3px;-o-border-radius:3px;-webkit-border-radius:3px;font-family:'Microsoft Yahei',arial,sans-serif;font-weight:bold;}
+.btn i{padding-right:5px;}
+.btn a{display:block;}
+.btn-block{ display:block;}
+.mini.btn a{padding:5px 10px;font-size:12px;line-height:14px;}
+.small.btn,.small button{padding:7px 20px;font-size:12px;line-height:16px;}
+.medium.btn,.medium button{padding:9px 25px;font-size:14px;line-height:16px;}
+.medium button{padding:9px 25px;}
+.medium > i{ position:relative; top:-2px; font-size:12px; vertical-align:middle;}
+.large.btn,.large button{padding:20px 40px;font-size:18px;line-height:20px;}
+.x-large.btn,.x-large button{padding:40px 30px;font-size:30px;line-height:30px;}
+.big.btn,.big button{padding:25px 50px;font-size:20px;line-height:24px;}
+.huge.btn,.huge button{padding:30px 60px;font-size:24px;line-height:30px;}
+.primary.btn,.primary button{background:#ee4d4e;color:#fff;border:1px solid #cf3d40;}
+.primary.btn:hover{background:#c91523;border:1px solid #a10b0b;}
+.secondary.btn,.secondary button{background:#f9fafb;border:1px solid #d2d8e0;}
+.secondary.btn:hover{background:#f1f2f7;border:1px solid #84899c;}
+.green.btn{background:#63b76c;color:#fff;}
+.green.btn:hover{background:#5faa67;}
+.btn-group{padding:15px 0px; position:relative; left:-5px; overflow:hidden;}
+.c.btn-group{ padding:0; left:0;}
+.btn-group > span{display:inline-block; margin:0 5px;}
+.form-group .btn-group{ padding:0; left:-5px;}
+.form-group .btn-group button{ margin:0 5px; }
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn{cursor: not-allowed;pointer-events: none;opacity: .65;filter: alpha(opacity=65);-webkit-box-shadow: none;box-shadow: none}
+/*-- Heading --*/
+.heading{background:#fff;font-family:'Microsoft Yahei',arial,sans-serif;font-weight:bold;position:relative;}
+.heading h3{display:inline-block;}
+.table.heading{ border:1px solid #ddd; padding-right:20px; background:#eee;}
+.small.heading h3{height:38px;line-height:38px;font-size:12px;margin:0 20px;}
+.medium.heading h3,.table.heading h3{height:40px;line-height:40px;font-size:14px; padding:0 20px;}
+.small.heading{height:38px; line-height:38px;}
+.heading i{padding-right:10px;vertical-align:middle;}
+.heading em,.col-hd sub-hd em{display:inline-block;vertical-align:middle;font-family:'Microsoft Yahei',arial,sans-serif;font-weight:bold}
+.heading em i{padding:0 10px;}
+.light-grey.section.heading{background:#fbfbfb;  border:1px solid #ddd;}
+.light-grey.section.heading h3{ font-size:1em; line-height:32px;}
+.section.heading{background:#eee;  border:1px solid #ddd; height:auto; line-height:1; padding:5px 20px;}
+.section.heading h3{ height:auto; line-height:1; padding:0;}
+.section.heading .iconbox-md em{ position:relative; line-height:1;}
+.section.heading .iconbox-md i{ font-size:1.4em; padding:0;}
+h5,.h5,h6,.h6,h4,.h4,h2,.h2,h3,.h3,h1,.h1{font-family:'Microsoft Yahei',arial,sans-serif;font-weight:bold;}
+h1,.h1{font-size: 36px}h2,.h2{font-size: 30px}h3,.h3{font-size: 24px}h4,.h4{font-size: 18px}h5,.h5{font-size: 14px}h6,.h6{font-size: 12px}
+h5,.h5,h6,.h6,h4,.h4{ line-height:40px; }
+h2,.h2,h3,.h3{ line-height:50px;}
+h1,.h1{ line-height:60px;}
+
+
+.con_main{
+  padding: 0px 20px 10px 0px;
+}
+
+.form-inline-panel {
+  width: 100%;
+  float: left;
+  border: 1px solid #e7e4ed;
+  background: #fff;
+  padding: 15px 18px 15px 18px;
+  box-sizing: border-box;
+}
+.form-inline-panel .span10{
+  width: 10%
+}
+.form-inline-panel .span100{
+  width: 100%
+}
+.form-group .line {
+  width: 100%;
+  display: table;
+  box-sizing: border-box;
+}
+.form-group.small .line {
+  font-size: 12px;
+  line-height: 20px;
+  padding: 6px 0;
+}
+.form-inline {
+  float: left;
+  display: table;
+  zoom: 1;
+}
+.small .form-inline {
+  height: 30px;
+  line-height: 30px;
+}
+.form-group .span20 {
+  width: 20%;
+}
+.characters8 {
+  width: 100px;
+}
+.small label {
+  height: 32px;
+  line-height: 32px;
+}
+.form-inline-panel .form-inline label {
+  text-align: right;
+}
+
+.small select {
+  padding: 7px 4px;
+  line-height: 20px;
+}
+
+/* k */
+.pic_80x80{
+  width: 80px;
+  height: 80px;
+}
+.pic_138x46{
+  width: 138px;
+  height: 46px;
+}
+.bor_lt_gre_k{
+	border-left: 3px solid #e7e4ed;
+}
+.bor_lt_gre_k:hover{
+  border-left-color: #039be5;
+}
+.dis_inline_k{
+	display: inline-block;
+	vertical-align: middle;
+}
+.text_blue_k{
+	color: #00047f
+}
+.btn_style_01_k{
+	display: inline-block;
+	padding: 0 15px;
+	height: 32px;
+	line-height: 30px;
+	border: 1px solid #9d95ad;
+	border-radius: 3px;
+	color: #333;
+}
+.btn_style_01_k em{
+  cursor: pointer;
+}
+.min_wid_145_k{
+	  display: inline-block;
+    width: 145px;
+	  word-wrap: break-word;
+	  word-break: normal;
+	  white-space: normal;
+	  text-align: left;
+}
+.select_wid_110_k select{
+	width: 110px;
+}
+.background_fff_k:hover{ height: 100%;}
+.background_fff_k table tbody{
+	background: #fff;
+}
+.flagship_store_ico{
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	margin: -3px 5px 0 0;
+	background: url(../../static/images/icon_extension.png) no-repeat left center;
+	vertical-align: middle;
+}
+.dis_ine_p_k p{
+	margin: 0px;
+	padding: 3px 0;
+}
+.tips_tu_k{
+	font-family: "宋体";
+	color: #e5a016;
+}
+
+.datetable thead td > i {
+  display: inline-block;
+  width: 19px;
+  height: 19px;
+  background: url(../../static/images/sort_both.png) no-repeat center center;
+  vertical-align: middle;
+}
+.datetable thead td > i.desc {
+  background: url(../../static/images/sort_desc.png) no-repeat center center;
+  cursor: pointer;
+}
+.datetable thead td > i.asc {
+  background: url(../../static/images/sort_asc.png) no-repeat center center;
+  cursor: pointer;
+}
+.posi_re_k{
+	position: relative;
+}
+.posi_ab_k{
+  position: absolute;
+}
+.medium.access_code_btn_k{
+	position: absolute;
+	right: 15px;
+	top: 50%;
+	margin-top: -29px;
+	padding: 20px 20px;
+}
+.thead_k h3{
+	margin: 0px;
+	padding: 10px 0px;
+}
+.thead_k h3 span{
+	display: inline-block;
+	width: 3px;
+	height: 13px;
+	margin: -3px 5px 0 0;
+	background: #e4393c;
+	vertical-align: middle;
+}
+
+.profile-page .hd .profile-info.income,.profile-page .hd .profile-info.income td {
+  width: auto
+}
+
+.income .opration-btn {
+  white-space: nowrap;
+}
+
+.profile-page .hd .profile-info.income {
+  float: left;
+}
+
+.profile-page .hd .btn-box {
+  float: right
+}
+
+.profile-page .hd a.opration-btn ,.profile-page .hd button.opration-btn{
+  padding: 15px 20px;
+  background: #fff;
+  border: solid 1px #0093d1;
+  color: #333;
+  font-weight: bold;
+  font-size: 15px;
+  display: block;
+  margin-top: 25px;
+}
+@media(max-width: 1100px) {
+  .profile-page .hd {
+    height: auto
+  }
+
+  .profile-page .hd.basic-infor .user-pic img {
+    margin-top: 50px
+  }
+
+  .profile-page .hd .user-pic {
+    height: 163px;
+  }
+
+  .profile-page .hd .btn-box,.profile-page .hd .profile-info.income {
+    float: none
+  }
+
+  .profile-page .hd a.opration-btn {
+    margin: 0 0 15px;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    margin-left: 20px
+  }
+}
+
+/* 2015-09-24 meng */

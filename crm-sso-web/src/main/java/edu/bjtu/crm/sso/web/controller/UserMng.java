@@ -6,6 +6,7 @@ import edu.bjtu.crm.sso.domain.model.User;
 import edu.bjtu.crm.sso.domain.model.UserInfo;
 import edu.bjtu.crm.sso.service.UserMngService;
 import edu.bjtu.crm.sso.web.constant.ApiEnum;
+import edu.bjtu.crm.sso.web.constant.Bar;
 import edu.bjtu.crm.sso.web.constant.LoginStatusEnum;
 import edu.bjtu.crm.sso.web.util.UserLocal;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,11 @@ public class UserMng {
     public String userMng(Model model) {
         UserInfo userInfo = UserLocal.get();
         model.addAttribute("userinfo",userInfo);
+        List<Bar> bars = new ArrayList<>();
+        bars.add(new Bar("个人信息", "userinfo()"));
+        bars.add(new Bar("用户查询", "userinfoSearch()"));
+        bars.add(new Bar("添加用户", "userAdd()"));
+        model.addAttribute("bars",bars);
         return "userMng";
     }
 
@@ -72,6 +78,11 @@ public class UserMng {
         User user = new User();
         user.setPassword(userInfo.getPassword());
         String username = userMngService.addUser(user,userInfo);
+        if ("".equals(username)) {
+            response.setCode(ApiEnum.ERROR.getCode());
+            response.setMessage(ApiEnum.ERROR.getValue());
+            return response;
+        }
         userInfo.setUsername(username);
         response.setCode(ApiEnum.SUCCESS.getCode());
         response.setMessage(ApiEnum.SUCCESS.getValue());

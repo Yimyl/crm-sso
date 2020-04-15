@@ -7,9 +7,6 @@
     <#--    <script type="text/javascript" src="/js/login.js?version=2020012301"></script>-->
 </head>
 <body>
-<div class="sso-login">
-    欢迎${username}
-</div>
 <#include "top.ftl">
 <button>添加交易记录</button>
 <button>用户业绩统计</button>

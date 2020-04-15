@@ -1,0 +1,150 @@
+<div class="row-1x">
+    #if($!unionSkuComm)
+        <div class="vm pagination-input group-inline-1x  pull-right" style="padding-top: 5px">每页
+            <select id="pageSizeSelect" onchange="changePageSize()">
+                <option #if($!page.pageSize == 10) selected="selected"#end>10</option>
+                <option #if($!page.pageSize == 20) selected="selected"#end>20</option>
+                <option #if($!page.pageSize == 50) selected="selected"#end>50</option>
+                <option #if($!page.pageSize == 100) selected="selected"#end>100</option>
+            </select> 条
+        </div>
+    #end
+    <div class="pagination-input group-inline-1x  pull-right">
+        <span class="vm inline-block offset-2x">#springMessage('global_page_total') $!page.pageTotal #springMessage(
+            'global_page_pages')</span>
+        <span class="col-fixed150 vm">
+            #if($!page.pageTotal>0)
+
+            <div class="input-group margin-0">
+              <input id="gotopage" type="text" class="form-control" value=$!page.pageNo>
+            <span class="input-group-btn">
+            <button class="btn btn-default" type="button" onclick="sureClick()">#springMessage(
+                'global_confirm')</button>
+            </span>
+           </div>
+            #end
+        </span>
+    </div>
+</div>
+<ul class="pagination margin-0 pull-right">
+## 定义区间大小
+    #set($range= 4 )
+## 如果当前页大于1 显示上一页
+    #if($!page.pageNo > 1)
+        <li><a href="javascript:void(0);" onclick="pageClick($!page.pageNo -1)">#springMessage('page_last_page')</a>
+        </li>
+    #end
+## 如果总页数大于2页   默认显示 1、2页  否则默认显示1页
+    #if($!page.pageNo > 2)
+        <li><a href="javascript:void(0);" onclick="pageClick(1)">1</a></li>
+        <li><a href="javascript:void(0);" onclick="pageClick(2)">2</a></li>
+    #end
+
+    #if($!page.pageNo == 2)
+        <li><a href="javascript:void(0);" onclick="pageClick(1)">1</a></li>
+    #end
+
+##判断前置.. 如果当前页大于 1+区间  显示..
+    #set($pageNoTemp= $range +1)
+    #if($!page.pageNo > 3)
+        <li><a href="javascript:void(0)">...</a></li>
+    #end
+
+## 遍历  当前页 至区间末端 的页码
+    #set($temp = $!page.pageNo+$range)
+    #if($temp > $!page.pageTotal)
+        #set($temp = $!page.pageTotal)
+    #end
+    #if($!page.pageTotal>0)
+        #foreach($i  in [$!page.pageNo..$temp])
+            #if($i == $!page.pageNo )
+                <li class="active"><a href="javascript:void(0);">$i</a></li>
+            #else
+                <li><a href="javascript:void(0);" onclick="pageClick($!i)">$i</a></li>
+            #end
+        #end
+    #end
+
+## 设置后端.. 如果区间末页 小于最终页 显示.....
+    #if($page.pageTotal - $page.pageNo > $range)
+        <li><a href="javascript:void(0)">...</a></li>
+    #end
+##设置显示下一页
+    #if($!page.pageTotal > $!page.pageNo)
+        <li><a href="javascript:void(0);" onclick="pageClick($!page.pageNo+1)">#springMessage('page_next_page')</a></li>
+    #end
+</ul>
+
+<script src="/static/js/tools/pagehash.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        initQueryHash()
+    })
+
+    //跳转到指定页
+    function sureClick() {
+        pageClick($("#gotopage").val());
+        return false;
+    }
+
+    //跳转到上一页或者下一页
+    function pageClick(pageNo) {
+        if (!isLegalSearch(pageNo)) {
+            return;
+        }
+        $("#pageNo").val(pageNo);
+        buildForm();
+        return false;
+    }
+
+    function buildForm() {
+        var form = $("#" + formId);
+        form.submit();
+        return false;
+    }
+
+    /**
+     * 【分页显示】：
+     * 获取总页数
+     */
+    function getTotalPage() {
+        return parseInt('$page.pageTotal');
+    }
+
+    /**
+     * 判断pageNo是否合法
+     * 1: 是否是数字 2:是否小于1 3:是否大于总页数
+     */
+    function isLegalSearch(pageNo) {
+        var isLegal = false;
+        if (!isPositiveInteger(pageNo)) {
+            alert('#springMessage('message_illegal_page_numner')');
+            return isLegal;
+        }
+        if (pageNo < 1) {
+            alert('#springMessage('message_illegal_page_first_numner')');
+            return isLegal;
+        }
+        if (pageNo > getTotalPage()) {
+            alert('#springMessage('message_illegal_page_end_numner')');
+            return isLegal;
+        }
+        isLegal = true;
+        return isLegal;
+    }
+
+    //判断该对象是否是正的整数组成
+    function isPositiveInteger(number) {
+        var result = false;
+        var reg = /^[0-9]*[1-9][0-9]*$/;
+        if (reg.test(number)) {
+            result = true;
+        }
+        return result;
+    }
+    function changePageSize() {
+        $("#pageSize").val($("#pageSizeSelect").val());
+        $("#queryForm").submit();
+    }
+</script>

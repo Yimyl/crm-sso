@@ -6,6 +6,8 @@ import edu.bjtu.crm.sso.service.UserMngService;
 import edu.bjtu.crm.sso.domain.model.User;
 import edu.bjtu.crm.sso.domain.model.UserInfo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
 
@@ -17,18 +19,24 @@ public class UserMngServiceImpl implements UserMngService {
     @Resource
     private UserInfoMapper userInfoMapper;
 
+    @Transactional
     @Override
     public String addUser(User user, UserInfo userInfo) {
-        int num = userInfoMapper.findNumOfPinyin(userInfo.getPinyin());
-        if (num == 0) {
-            userInfo.setUsername(userInfo.getPinyin());
-        } else {
-            userInfo.setUsername(userInfo.getPinyin() + (num + 1));
+        try {
+            int num = userInfoMapper.findNumOfPinyin(userInfo.getPinyin());
+            if (num == 0) {
+                userInfo.setUsername(userInfo.getPinyin());
+            } else {
+                userInfo.setUsername(userInfo.getPinyin() + (num + 1));
+            }
+            user.setUsername(userInfo.getUsername());
+            userMapper.addUser(user);
+            userInfoMapper.addUserInfo(userInfo);
+            return userInfo.getUsername();
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return "";
         }
-        user.setUsername(userInfo.getUsername());
-        userInfoMapper.addUserInfo(userInfo);
-        userMapper.addUser(user);
-        return userInfo.getUsername();
     }
 
     @Override

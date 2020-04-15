@@ -8,9 +8,8 @@
     <script type="text/javascript" src="/js/login.js?version=2020012301"></script>
 </head>
 <body>
-<div>
-欢迎${username}
-</div>
+<#include "default.ftl">
 <#include "top.ftl">
+<#include "sidebar.ftl">
 </body>
 </html>

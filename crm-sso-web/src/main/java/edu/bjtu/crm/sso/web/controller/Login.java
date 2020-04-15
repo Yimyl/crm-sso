@@ -87,6 +87,16 @@ public class Login {
         return LoginStatusEnum.UsernamepasswordError.getValue();
     }
 
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request,  HttpServletResponse response, String username) {
+        //生成验证码
+        UserLocal.set(null);
+        Cookie cookie = new Cookie(LoginInfo.TOKEN, "");
+        cookie.setMaxAge(-1);
+        response.addCookie(cookie);
+        return "/login";
+    }
+
     @RequestMapping("/register")
     public String register(HttpServletRequest request, String username, String password, String password2, String email) {
         //生成验证码

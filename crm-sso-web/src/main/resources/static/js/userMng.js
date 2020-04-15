@@ -2,6 +2,14 @@ $(function () {
     // $(".sso-login-remember input").onclick(checkboxClick());
 });
 
+function addBar(name, onclick) {
+    alert($('.side-menu').html());
+    $('.side-menu').html("<li id=\"__actCommit\" class=\"\"><i class=\"icon-ad-calendar\"></i> <span>left1</span></a>\n" +
+        "            <div id=\"expire\"></div>\n" +
+        "        </li>");
+    // $('.side-menu').html("<li id=\"__actCommit\" class=\"\"><i class=\"icon-ad-calendar\"></i> <span onclick='"+ onclick + "'>" + name +"</span></a></li>");
+}
+
 function userinfo() {
     $('.myform').each(function(){$(this).addClass("displayNone")});
     $('.user_info').removeClass("displayNone")

@@ -1,0 +1,274 @@
+.con_main0 {
+    margin-top:10px;
+}
+
+.tggl-page-con .tab-content {
+    padding: 20px 10px;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-top: none;
+    /*overflow-x: scroll;*/
+}
+
+.text-center {
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    font-size: 12px;
+    border: 0px solid #ddd;
+    color: #333;
+    background-color: transparent;
+}
+
+td, th {
+    padding: 0;
+}
+
+.basic {
+    width: 100%;
+   /* overflow: auto;*/
+}
+
+/**表头**/
+.basic table thead, .basic table thead th {
+    background: 0;
+}
+
+.basic table thead {
+    background: #fff;
+    color: #444;
+    font-weight: bold;
+}
+
+.basic table thead .tab-border-top {
+    border-top: 1px solid #e7e4ed;
+    border-left: 1px solid #e7e4ed;
+    border-right: 1px solid #e7e4ed;
+    padding: 0;
+    background: #ffffff!important;
+    border-bottom: none!important;
+}
+
+.basic table thead .tab-border-bottom {
+    border-bottom: 1px solid #e7e4ed;
+    border-left: 1px solid #e7e4ed;
+    border-right: 1px solid #e7e4ed;
+    padding: 0;
+    background: #ffffff!important;
+}
+
+.basic table thead tr {
+    height: 15px;
+}
+
+.basic table thead  .align-tr td {
+    border: 0;
+    text-align: center;
+    padding: 0 10px;
+    height: 20px;
+    border-left: 1px solid #e7e4ed;
+    border-right: 1px solid #e7e4ed;
+    background: #ffffff!important;
+}
+
+.basic table thead .align-tr .boder0 {
+    border: 0;
+}
+
+.basic .blcf-body {
+}
+
+.basic .blcf-body div {
+    float: left;
+}
+
+.basic  .width50 {
+    width: 49.5%;
+    position: absolute;
+    top: 18px;
+    text-align: center;
+    transform: scale(0.9);
+}
+
+.basic .blcf-body .borde-left {
+    border-left: 1px solid #e7e4ed;
+    left: 49%
+}
+
+.basic .blcf {
+    width: 100%;
+    border-bottom: 1px solid #e7e4ed;
+}
+
+.basic table tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+    text-align: left;
+    border: 0;
+}
+
+tr td {
+    white-space: nowrap;
+}
+
+.basic table td {
+    border-top: 0px;
+    padding: 10px;
+    text-align: center;
+}
+
+.basic td {
+    padding: 15px 10px;
+    border-top:none!important;
+}
+
+.vam {
+    display: inline-block;
+    zoom: 1;
+    vertical-align: middle;
+}
+
+.ico-ask-mingxi span {
+    vertical-align: middle;
+}
+
+.ico-ask-mingxi span {
+    background: url(../../static/images/ico01mingxi.jpg) no-repeat;
+    width: 12px;
+    height: 12px;
+    background-size:100% 100%;
+    overflow: hidden;
+    display: inline-block;
+    zoom: 1;
+}
+
+
+/**表body**/
+.basic table tbody {
+    font-size: 12px;
+    color: #000;
+}
+
+.basic table tbody .padding0 {
+    padding: 0;
+}
+
+.basic table tbody .body-hr {
+    height: 15px;
+    padding: 0;
+}
+
+.basic table tbody .border-top {
+    border-top: 1px solid #e7e4ed;
+    border-left: 1px solid #e7e4ed;
+    border-right: 1px solid #e7e4ed;
+    background: #f6f7fb;
+}
+
+.basic table tbody .border-body {
+    border-left: 1px solid #e7e4ed;
+    border-right: 1px solid #e7e4ed;
+    background: #ffffff;
+    display: none;
+
+}
+.tbody-tab tr{
+    background: #ffffff;
+}
+.zhankai{
+    background: #ffffff;
+}
+
+.basic table tbody .active {
+    display: none
+}
+
+.basic table tbody .zhankai {
+    border-left: 1px solid #e7e4ed;
+    border-right: 1px solid #e7e4ed;
+}
+
+.basic table tbody .border-body .border-dotted {
+    border-bottom: 1px dotted #e7e4ed;
+    background-color: #e4edf2;
+}
+
+.basic table tbody .border-body .ckgd {
+    border-bottom: 1px solid #e7e4ed;
+}
+
+.basic table tbody .zhankai td {
+    border-bottom: 1px solid #e7e4ed;
+}
+
+.basic table tbody .border-top .border-td {
+    padding: 5px 10px;
+}
+
+.basic table tbody .border-body .border0 {
+    border-bottom: 0;
+}
+
+.basic table tbody .color-red {
+    color: #039be5;
+}
+
+.basic table tbody .arrow-img {
+    vertical-align: sub;
+    margin-right: 10px;
+}
+
+.arrow-out{
+    width: 188px;
+    margin:0 auto;
+}
+.arrow-out img{
+    display: block;
+    float: left;
+}
+.arrow-out span{
+    display: block;
+    float: left;
+}
+
+.popover{
+    width: 300px!important;
+}
+.con-one{
+    background: #ffffff;
+
+}
+.header-out-w{
+    background: #ffffff;
+    border-left: 1px solid #e7e4ed;
+    overflow: hidden;
+    padding-top: 10px;
+    border-right: 1px solid #e7e4ed;
+    padding-right: 10px;
+}
+.tab-content{
+    border-left:none!important;
+    border-right:none!important;
+}
+.filter-radiobox span{display:block;line-height: 30px;text-align: center;background: #fff;}
+
+label{
+    color:#000!important;
+}
+.form-group{
+    margin-right:20px;
+}
+.input-group{
+    margin-bottom:0px;
+}
+button{
+    margin-right:10px;
+}
+.nav-tabs li:hover{
+    color:#039be5!important;
+}
