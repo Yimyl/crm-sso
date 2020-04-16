@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>客户管理</title>
     <script type="text/javascript" src="/js/jquery-3.3.1.min.js?version=2020012301"></script>
-    <script type="text/javascript" src="/js/consumerMng.js?version=2020012301"></script>
+    <script type="text/javascript" src="/js/productMng.js?version=2020012301"></script>
 </head>
 <body>
 <#include "default.ftl">

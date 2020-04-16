@@ -3,6 +3,24 @@
 }
 .mycontent{
     position: fixed;
-    top: 60px;
+    top: 70px;
     left: 200px;
+}
+
+.width80{
+    width: 80px;
+    text-align: right;
+    margin-right: 10px;;
+}
+
+.mybutton{
+    width: 50px;
+    height: 20px;
+    background-color: #03a9f4;
+    margin-right: 20px;
+}
+
+.searchRes{
+    height: 800px;
+    overflow-y: scroll;
 }

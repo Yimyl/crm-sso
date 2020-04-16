@@ -53,4 +53,32 @@ public class UserMngServiceImpl implements UserMngService {
     public UserInfo findUserInfoById(long id) {
         return userInfoMapper.findUserInfoById(id);
     }
+
+    @Override
+    public int updatePassword(User user, String password) {
+        return userInfoMapper.updatePassword(user, password);
+    }
+
+    @Override
+    public UserInfo findUserInfoByUserInfo(UserInfo userInfo) {
+        return userInfoMapper.findUserInfoByUserInfo(userInfo);
+    }
+
+    @Override
+    public int updateUserInfo(UserInfo userInfo) {
+        return userInfoMapper.updateUserInfo(userInfo);
+    }
+
+    @Transactional
+    @Override
+    public int deleteUserInfoByUsername(String username) {
+        try {
+            userInfoMapper.deleteUserInfoByUsername(username);
+            userMapper.deleteUserByUsername(username);
+            return 1;
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return 0;
+        }
+    }
 }

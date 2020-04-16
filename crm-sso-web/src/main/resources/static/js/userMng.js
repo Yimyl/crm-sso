@@ -2,42 +2,34 @@ $(function () {
     // $(".sso-login-remember input").onclick(checkboxClick());
 });
 
-function addBar(name, onclick) {
-    alert($('.side-menu').html());
-    $('.side-menu').html("<li id=\"__actCommit\" class=\"\"><i class=\"icon-ad-calendar\"></i> <span>left1</span></a>\n" +
-        "            <div id=\"expire\"></div>\n" +
-        "        </li>");
-    // $('.side-menu').html("<li id=\"__actCommit\" class=\"\"><i class=\"icon-ad-calendar\"></i> <span onclick='"+ onclick + "'>" + name +"</span></a></li>");
-}
-
 function userinfo() {
     $('.myform').each(function(){$(this).addClass("displayNone")});
-    $('.user_info').removeClass("displayNone")
+    $('.user_info').removeClass("displayNone");
 }
 
 function userinfoModify() {
     $('.myform').each(function(){$(this).addClass("displayNone")});
-    $('.user_info_modify').removeClass("displayNone")
+    $('.user_info_modify').removeClass("displayNone");
 }
 
 function passwordModify() {
     $('.myform').each(function(){$(this).addClass("displayNone")});
-    $('.user_info_password_modify').removeClass("displayNone")
+    $('.user_info_password_modify').removeClass("displayNone");
 }
 
 function userinfoSearch() {
     $('.myform').each(function(){$(this).addClass("displayNone")});
-    $('.user_info_search').removeClass("displayNone")
+    $('.user_info_search').removeClass("displayNone");
 }
 
 function userinfoSearchModify() {
     $('.myform').each(function(){$(this).addClass("displayNone")});
-    $('.user_info_search_modify').removeClass("displayNone")
+    $('.user_info_search_modify').removeClass("displayNone");
 }
 
 function userAdd() {
     $('.myform').each(function(){$(this).addClass("displayNone")});
-    $('.user_add').removeClass("displayNone")
+    $('.user_add').removeClass("displayNone");
 }
 
 function userAddSubmit() {
@@ -96,20 +88,23 @@ function userAddSubmit() {
 
 function userinfoSearchSubmit() {
     var id = $('#search_id').val();
+    if (id == "") {
+        id = -1;
+    }
     var username = $('#search_username').val();
-    var name = $('#search_name').val();
-    var position = $('#search_position').val();
-    var isMng = $('#search_isMng').val();
-    var email = $('#search_email').val();
+    // var name = $('#search_name').val();
+    // var position = $('#search_position').val();
+    // var isMng = $('#search_isMng').val();
+    // var email = $('#search_email').val();
     var phone = $('#search_phone').val();
 
     var param = {
         id: id,
         username: username,
-        name: name,
-        position: position,
-        isMng: isMng,
-        email: email,
+        // name: name,
+        // position: position,
+        // isMng: isMng,
+        // email: email,
         phone: phone
     };
 
@@ -123,13 +118,183 @@ function userinfoSearchSubmit() {
         success: function (data) {
             console.log(data);
             if (data.code == 200) {
+                var res = data.result;
+                $('.userinfoSearchId').html(res.id);
+                $('.userinfoSearchUsername').html(res.username);
+                $('#userinfoSearchName').html(res.name);
+                $('#userinfoSearchPosition').html(res.position);
+                if (res.isMng == 0) {
+                    $('#userinfoSearchIsMng').html("否");
+                } else {
+                    $('#userinfoSearchIsMng').html("是");
+                }
+                $('#userinfoSearchEmail').html(res.email);
+                $('#userinfoSearchPhone').html(res.phone);
 
+                $('#userinfoSearchModifyName').val(res.name);
+                $('#userinfoSearchModifyPosition').val(res.position);
+                $('#userinfoSearchModifyIsMng').val(res.isMng);
+                $('#userinfoSearchModifyEmail').val(res.email);
+                $('#userinfoSearchModifyPhone').val(res.phone);
             } else {
                 alert("查询失败," + data.message);
             }
         },
         error: function (error) {
             alert("保存失败,服务器异常");
+            // $("#saveButton").removeAttr("disabled");
+        }
+    });
+}
+
+function passwordModifySubmit() {
+    var username = $('#username').html();
+    var password0 = $('#password_modify_password0').val();
+    var password1 = $('#password_modify_password1').val();
+    var password2 = $('#password_modify_password2').val();
+
+    if (password1 != password2) {
+        alert("新密码不相同");
+        return false;
+    }
+    var param = {
+        username: username,
+        password: password0,
+        passwordNew: password1,
+    };
+
+    $.ajax({
+        type: "POST",
+        url: "/userMng/passwordModify",
+        data: JSON.stringify(param),
+        dataType: "json",
+        contentType: "json/application",
+        async: false,
+        success: function (data) {
+            console.log(data);
+            if (data.code == 200) {
+                alert("修改成功" );
+            } else {
+                alert("修改失败",data.message);
+            }
+        },
+        error: function (error) {
+            alert("修改失败,服务器异常");
+            // $("#saveButton").removeAttr("disabled");
+        }
+    });
+}
+
+function userinfoModifySubmit() {
+    var username = $('#username').html();
+    var name = $('#userinfoModifyName').val();
+    var position = $('#userinfoModifyPosition').val();
+    var isMng = $('#userinfoModifyIsMng').val();
+    var email = $('#userinfoModifyEmail').val();
+    var phone = $('#userinfoModifyPhone').val();
+
+    var param = {
+        username: username,
+        name: name,
+        position: position,
+        isMng: isMng,
+        email: email,
+        phone: phone
+    };
+
+
+    $.ajax({
+        type: "POST",
+        url: "/userMng/userInfoModify",
+        data: JSON.stringify(param),
+        dataType: "json",
+        contentType: "json/application",
+        async: false,
+        success: function (data) {
+            console.log(data);
+            if (data.code == 200) {
+                $('#username').html();
+                $('#name').html(name);
+                $('#position').html(position);
+                if (isMng==0) {
+                    $('#isMng').html("否");
+                } else {
+                    $('#isMng').html("是");
+                }
+                $('#email').html(email);
+                $('#phone').html(phone);
+                alert("修改成功" );
+            } else {
+                alert("修改失败",data.message);
+            }
+        },
+        error: function (error) {
+            alert("修改失败,服务器异常");
+        }
+    });
+}
+
+function userinfoSearchDelete() {
+    var username = $('.userinfoSearchUsername').html();
+
+
+    $.ajax({
+        type: "POST",
+        url: "/userMng/userInfoDelete/" + username,
+        data: "",
+        dataType: "json",
+        contentType: "json/application",
+        async: false,
+        success: function (data) {
+            console.log(data);
+            if (data.code == 200) {
+                alert("删除成功" );
+            } else {
+                alert("删除失败",data.message);
+            }
+        },
+        error: function (error) {
+            alert("修改失败,服务器异常");
+        }
+    });
+}
+
+function userinfoSearchModifySubmit() {
+    var username = $('.userinfoSearchUsername').html();
+    var name = $('#userinfoSearchModifyName').val();
+    var position = $('#userinfoSearchModifyPosition').val();
+    var isMng = $('#userinfoSearchModifyIsMng').val();
+    var email = $('#userinfoSearchModifyEmail').val();
+    var phone = $('#userinfoSearchModifyPhone').val();
+
+    var param = {
+        username: username,
+        name: name,
+        position: position,
+        isMng: isMng,
+        email: email,
+        phone: phone
+    };
+
+
+    $.ajax({
+        type: "POST",
+        url: "/userMng/userInfoModify",
+        data: JSON.stringify(param),
+        dataType: "json",
+        contentType: "json/application",
+        async: false,
+        success: function (data) {
+            console.log(data);
+            if (data.code == 200) {
+                window.location.href = "/userMng/username/" + username;
+                alert("修改成功" );
+            } else {
+                alert("修改失败",data.message);
+            }
+        },
+        error: function (error) {
+            alert("修改失败,服务器异常");
             // $("#saveButton").removeAttr("disabled");
         }
     });

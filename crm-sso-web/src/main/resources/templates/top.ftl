@@ -9,7 +9,7 @@
             <a class="navbar-brand" href="/home"></a> </div>
         <div class="navbar-collapse collapse" role="navigation">
             <ul class="nav navbar-nav navbar-right user-state">
-                <li><span class="padding-lr-2x"><i class="icon-user"></i>${username}</span></li>
+                <li><span class="padding-lr-2x"><i class="icon-user"></i>${userinfo.username}</span></li>
                 <li><a href="/logout"><i class="icon-exit"></i>退出</a></li>
             </ul>
             <ul class="site-nav nav navbar-nav">

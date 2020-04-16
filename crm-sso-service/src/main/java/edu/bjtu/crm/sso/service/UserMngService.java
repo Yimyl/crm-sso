@@ -11,4 +11,12 @@ public interface UserMngService {
     UserInfo findUserInfoByUsername(String username);
 
     UserInfo findUserInfoById(long id);
+
+    int updatePassword(User user, String password);
+
+    UserInfo findUserInfoByUserInfo(UserInfo userInfo);
+
+    int updateUserInfo(UserInfo userInfo);
+
+    int deleteUserInfoByUsername(String username);
 }

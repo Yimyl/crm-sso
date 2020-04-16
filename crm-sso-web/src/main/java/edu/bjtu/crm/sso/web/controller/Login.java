@@ -94,7 +94,7 @@ public class Login {
         Cookie cookie = new Cookie(LoginInfo.TOKEN, "");
         cookie.setMaxAge(-1);
         response.addCookie(cookie);
-        return "/login";
+        return "redirect:/login";
     }
 
     @RequestMapping("/register")

@@ -4,6 +4,7 @@ import edu.bjtu.crm.sso.domain.model.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface UserMapper {
@@ -17,5 +18,6 @@ public interface UserMapper {
     @Select("SELECT count(1) FROM crm_sso_user WHERE username = #{username} and password = sha(#{password}) and is_delete = false")
     int findUserByIdAndName(User user);
 
-
+    @Update("UPDATE crm_sso_user set is_delete = true WHERE username = #{username} and is_delete = false")
+    int deleteUserByUsername(String username);
 }

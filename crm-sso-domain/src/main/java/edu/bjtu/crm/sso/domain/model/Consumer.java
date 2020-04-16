@@ -1,6 +1,9 @@
 package edu.bjtu.crm.sso.domain.model;
 
-public class Customer {
+import lombok.Data;
+
+@Data
+public class Consumer {
     private long id;
     private String phone;
     private String name;
