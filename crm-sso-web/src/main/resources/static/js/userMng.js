@@ -137,11 +137,11 @@ function userinfoSearchSubmit() {
                 $('#userinfoSearchModifyEmail').val(res.email);
                 $('#userinfoSearchModifyPhone').val(res.phone);
             } else {
-                alert("查询失败," + data.message);
+                alert("搜索失败," + data.message);
             }
         },
         error: function (error) {
-            alert("保存失败,服务器异常");
+            alert("搜索失败,服务器异常");
             // $("#saveButton").removeAttr("disabled");
         }
     });

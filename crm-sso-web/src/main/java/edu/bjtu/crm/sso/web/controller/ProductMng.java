@@ -2,9 +2,9 @@ package edu.bjtu.crm.sso.web.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import edu.bjtu.crm.sso.common.CrmResponse;
-import edu.bjtu.crm.sso.domain.model.User;
+import edu.bjtu.crm.sso.domain.model.Product;
 import edu.bjtu.crm.sso.domain.model.UserInfo;
-import edu.bjtu.crm.sso.service.UserMngService;
+import edu.bjtu.crm.sso.service.ProductMngService;
 import edu.bjtu.crm.sso.web.constant.ApiEnum;
 import edu.bjtu.crm.sso.web.constant.Bar;
 import edu.bjtu.crm.sso.web.util.UserLocal;
@@ -19,107 +19,56 @@ import java.util.List;
 @Controller
 public class ProductMng {
     @Resource
-    private UserMngService userMngService;
+    private ProductMngService productMngService;
 
-    @RequestMapping("/userMng")
-    public String userMng(Model model) {
+    @RequestMapping("/productMng")
+    public String productMng(Model model) {
         UserInfo userInfo = UserLocal.get();
         model.addAttribute("userinfo",userInfo);
         List<Bar> bars = new ArrayList<>();
-        bars.add(new Bar("个人信息", "userinfo()"));
-        bars.add(new Bar("用户查询", "userinfoSearch()"));
-        bars.add(new Bar("添加用户", "userAdd()"));
+        bars.add(new Bar("添加交易记录", "profitAdd()"));
+        bars.add(new Bar("业绩搜索", "profitSearch()"));
         model.addAttribute("bars",bars);
-        return "userMng";
+        return "productMng";
     }
 
-    @RequestMapping("/userMng/id/{id}")
-    public String userMngQueryById(@PathVariable("id") long id, Model model) {
-        UserInfo userInfo = userMngService.findUserInfoById(id);
-        model.addAttribute("userinfoSearch",userInfo);
-        List<Bar> bars = new ArrayList<>();
-        bars.add(new Bar("个人信息", "userinfo()"));
-        bars.add(new Bar("用户查询", "userinfoSearch()"));
-        bars.add(new Bar("添加用户", "userAdd()"));
-        model.addAttribute("bars",bars);
-        return "userMng";
-    }
-
-    @RequestMapping("/userMng/username/{username}")
-    public String userMngQueryByUsername(@PathVariable("username") String username, Model model) {
-        UserInfo userInfo = userMngService.findUserInfoByUsername(username);
-        model.addAttribute("userinfoSearch",userInfo);
-        List<Bar> bars = new ArrayList<>();
-        bars.add(new Bar("个人信息", "userinfo()"));
-        bars.add(new Bar("用户查询", "userinfoSearch()"));
-        bars.add(new Bar("添加用户", "userAdd()"));
-        model.addAttribute("bars",bars);
-        return "userMng";
-    }
-
-    @RequestMapping("/userMng/search")
+    @RequestMapping("/productMng/search")
     @ResponseBody
-    public CrmResponse<UserInfo> userMngQuery(@RequestBody String param, Model model) {
-        CrmResponse<UserInfo> response = new CrmResponse<>();
-        if (UserLocal.getIsMng() == 0) {
-            response.setCode(ApiEnum.PERMISSION_DENIED.getCode());
-            response.setMessage(ApiEnum.PERMISSION_DENIED.getValue());
-            return response;
-        }
-        UserInfo userInfo = JSONObject.parseObject(param, UserInfo.class);
-        UserInfo res = userMngService.findUserInfoByUserInfo(userInfo);
+    public CrmResponse<List<Product>> productMngQuery(@RequestBody String param, Model model) {
+        CrmResponse<List<Product>> response = new CrmResponse<>();
+        Product product = JSONObject.parseObject(param, Product.class);
+        System.out.println(product);
+        List<Product> res = productMngService.findProductByProduct(product);
         response.setCode(ApiEnum.SUCCESS.getCode());
         response.setMessage(ApiEnum.SUCCESS.getValue());
         response.setResult(res);
         return response;
     }
 
-    @RequestMapping(value = "/userMng/userAdd", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-    @ResponseBody
-    public CrmResponse<UserInfo> userMngUserAdd(@RequestBody String param, Model model) {
-        CrmResponse<UserInfo> response = new CrmResponse<>();
-        if (UserLocal.getIsMng() == 0) {
-            response.setCode(ApiEnum.PERMISSION_DENIED.getCode());
-            response.setMessage(ApiEnum.PERMISSION_DENIED.getValue());
-            return response;
-        }
-        UserInfo userInfo = JSONObject.parseObject(param, UserInfo.class);
-        User user = new User();
-        user.setPassword(userInfo.getPassword());
-        String username = userMngService.addUser(user,userInfo);
-        if ("".equals(username)) {
-            response.setCode(ApiEnum.ERROR.getCode());
-            response.setMessage(ApiEnum.ERROR.getValue());
-            return response;
-        }
-        userInfo.setUsername(username);
-        response.setCode(ApiEnum.SUCCESS.getCode());
-        response.setMessage(ApiEnum.SUCCESS.getValue());
-        response.setResult(userInfo);
-        return response;
+    @RequestMapping(value = "/productMng/search/{name}", method = {RequestMethod.POST, RequestMethod.GET}, produces = "application/json;" +
+            "charset=utf-8")
+    public String productMngSearchByPhone(@PathVariable("name") String name, Model model) {
+        List<Bar> bars = new ArrayList<>();
+        bars.add(new Bar("产品信息查询", "productSearch()"));
+        bars.add(new Bar("添加新产品", "productAdd()"));
+        model.addAttribute("bars",bars);
+        Product product = productMngService.findProductByName(name);
+        model.addAttribute("productSearch", product);
+        return "productMng";
     }
 
-    @RequestMapping(value = "/userMng/passwordModify", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @RequestMapping(value = "/productMng/add", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public CrmResponse userMngPasswordModify(@RequestBody String param, Model model) {
-        CrmResponse response = new CrmResponse<>();
+    public CrmResponse<Product> productMngUserAdd(@RequestBody String param, Model model) {
+        CrmResponse<Product> response = new CrmResponse<>();
         if (UserLocal.getIsMng() == 0) {
             response.setCode(ApiEnum.PERMISSION_DENIED.getCode());
             response.setMessage(ApiEnum.PERMISSION_DENIED.getValue());
             return response;
         }
-        JSONObject userInfo = JSONObject.parseObject(param);
-        String username = userInfo.getString("username");
-        String password = userInfo.getString("password");
-        String passwordNew = userInfo.getString("passwordNew");
-        User user = new User(0, username,password);
-
-        if (userMngService.login(user) == 0){
-            response.setCode(ApiEnum.PERMISSION_DENIED.getCode());
-            response.setMessage("密码错误");
-            return response;
-        }
-        if (userMngService.updatePassword(user, passwordNew) == 1){
+        Product product = JSONObject.parseObject(param, Product.class);
+        System.out.println(product);
+        if (productMngService.addProduct(product) == 1) {
             response.setCode(ApiEnum.SUCCESS.getCode());
             response.setMessage(ApiEnum.SUCCESS.getValue());
             return response;
@@ -129,22 +78,19 @@ public class ProductMng {
         return response;
     }
 
-    @RequestMapping(value = "/userMng/userInfoModify", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @RequestMapping(value = "/productMng/modify", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public CrmResponse userMngUserInfoModify(@RequestBody String param, Model model) {
+    public CrmResponse productMngModify(@RequestBody String param, Model model) {
         CrmResponse response = new CrmResponse<>();
-        UserInfo userInfo = JSONObject.parseObject(param, UserInfo.class);
-        if (UserLocal.getIsMng() == 0 && !UserLocal.getUsername().equals(userInfo.getUsername()) ) {
+        Product product = JSONObject.parseObject(param, Product.class);
+        if (UserLocal.getIsMng() == 0) {
             response.setCode(ApiEnum.PERMISSION_DENIED.getCode());
             response.setMessage(ApiEnum.PERMISSION_DENIED.getValue());
             return response;
         }
-        if (userMngService.updateUserInfo(userInfo) == 1){
+        if (productMngService.updateProduct(product) == 1){
             response.setCode(ApiEnum.SUCCESS.getCode());
             response.setMessage(ApiEnum.SUCCESS.getValue());
-            if (UserLocal.getUsername().equals(userInfo.getUsername())) {
-                UserLocal.set(userMngService.findUserInfoByUsername(userInfo.getUsername()));
-            }
             return response;
         }
         response.setCode(ApiEnum.ERROR.getCode());
@@ -152,26 +98,31 @@ public class ProductMng {
         return response;
     }
 
-    @RequestMapping(value = "/userMng/userInfoDelete/{username}", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @RequestMapping(value = "/productMng/modify/{name}", method = {RequestMethod.POST, RequestMethod.GET}, produces = "application/json;charset=utf-8")
+    public String productMngModifyByPhone(@PathVariable("name") String name, Model model) {
+        List<Bar> bars = new ArrayList<>();
+        bars.add(new Bar("产品信息查询", "productSearch()"));
+        bars.add(new Bar("添加新产品", "productAdd()"));
+        model.addAttribute("bars",bars);
+        Product product = productMngService.findProductByName(name);
+        UserInfo userInfo = UserLocal.get();
+        model.addAttribute("userinfo",userInfo);
+        model.addAttribute("productModify", product);
+        return "productMng";
+    }
+
+    @RequestMapping(value = "/productMng/delete/{name}", method = {RequestMethod.POST, RequestMethod.GET}, produces = "application/json;" +
+            "charset=utf-8")
     @ResponseBody
-    public CrmResponse userMngUserInfoDelete(@PathVariable("username") String username) {
+    public CrmResponse productMngDelete(@PathVariable("name") String name) {
         CrmResponse response = new CrmResponse<>();
-        try {
-            if (UserLocal.getIsMng() == 0) {
-                response.setCode(ApiEnum.PERMISSION_DENIED.getCode());
-                response.setMessage(ApiEnum.PERMISSION_DENIED.getValue());
-                return response;
-            }
-            System.out.println("delete");
+        if (productMngService.deleteProductByName(name) == 1){
             response.setCode(ApiEnum.SUCCESS.getCode());
             response.setMessage(ApiEnum.SUCCESS.getValue());
-            System.out.println(username);
-            userMngService.deleteUserInfoByUsername(username);
-            return response;
-        } catch (Exception e) {
-            response.setCode(ApiEnum.ERROR.getCode());
-            response.setMessage(ApiEnum.ERROR.getValue());
             return response;
         }
+        response.setCode(ApiEnum.ERROR.getCode());
+        response.setMessage(ApiEnum.ERROR.getValue());
+        return response;
     }
 }

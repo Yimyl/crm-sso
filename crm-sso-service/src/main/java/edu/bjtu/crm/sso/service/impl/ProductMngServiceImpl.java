@@ -1,52 +1,48 @@
 package edu.bjtu.crm.sso.service.impl;
 
-import edu.bjtu.crm.sso.dao.mapper.ConsumerMapper;
-import edu.bjtu.crm.sso.domain.model.Consumer;
-import edu.bjtu.crm.sso.service.ConsumerMngService;
+import edu.bjtu.crm.sso.dao.mapper.ProductMapper;
+import edu.bjtu.crm.sso.domain.model.Product;
+import edu.bjtu.crm.sso.service.ProductMngService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class ProductMngServiceImpl implements ConsumerMngService {
+public class ProductMngServiceImpl implements ProductMngService {
     @Resource
-    private ConsumerMapper consumerMapper;
+    private ProductMapper productMapper;
 
 
     @Override
-    public int addConsumer(Consumer consumer) {
-        return consumerMapper.addConsumer(consumer);
+    public int addProduct(Product product) {
+        return productMapper.addProduct(product);
     }
 
 
     @Override
-    public Consumer findConsumerByName(String name) {
-        return consumerMapper.findConsumerByName(name);
+    public Product findProductByName(String name) {
+        return productMapper.findProductByName(name);
     }
 
     @Override
-    public Consumer findConsumerById(long id) {
-        return consumerMapper.findConsumerById(id);
+    public Product findProductById(long id) {
+        return productMapper.findProductById(id);
+    }
+
+
+    @Override
+    public List<Product> findProductByProduct(Product product) {
+        return productMapper.findProductByProduct(product);
     }
 
     @Override
-    public Consumer findConsumerByPhone(String phone) {
-        return consumerMapper.findConsumerByPhone(phone);
+    public int updateProduct(Product product) {
+        return productMapper.updateProduct(product);
     }
 
     @Override
-    public List<Consumer> findConsumerByConsumer(Consumer consumer) {
-        return consumerMapper.findConsumerByConsumer(consumer);
-    }
-
-    @Override
-    public int updateConsumer(Consumer consumer) {
-        return consumerMapper.updateConsumer(consumer);
-    }
-
-    @Override
-    public int deleteConsumerByPhone(String phone) {
-        return consumerMapper.deleteConsumerByPhone(phone);
+    public int deleteProductByName(String name) {
+        return productMapper.deleteProductByName(name);
     }
 }

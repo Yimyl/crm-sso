@@ -54,6 +54,14 @@
             <button onclick="consumerAddSubmit()">添加</button>
         </#if>
     </div>
+    <div class="consumer_balance myform displayNone">
+        <#if consumerinfo.isMng == 0>由于您不是管理员，暂无权限进行此操作！<#else>
+            <div><label class="width80">手机: </label><input id="consumer_balance_phone" type="text"></div>
+            <div><label class="width80">充值金额: </label><input id="consumer_balance_balance" type="number"></div>
+            <button onclick="consumerBalanceSubmit()">确认</button>
+        </#if>
+    </div>
+
 </div>
 </body>
 </html>

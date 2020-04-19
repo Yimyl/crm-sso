@@ -12,6 +12,11 @@ function consumerAdd() {
     $('.consumer_add').removeClass("displayNone");
 }
 
+function consumerBalance() {
+    $('.myform').each(function(){$(this).addClass("displayNone")});
+    $('.consumer_balance').removeClass("displayNone");
+}
+
 function consumerAddSubmit() {
     var name = $('#consumer_add_name').val();
     var phone = $('#consumer_add_phone').val();
@@ -90,7 +95,7 @@ function consumerSearchSubmit() {
             }
         },
         error: function (error) {
-            alert("保存失败,服务器异常");
+            alert("搜索失败,服务器异常");
             // $("#saveButton").removeAttr("disabled");
         }
     });
@@ -132,6 +137,43 @@ function consumerModifySubmit() {
         },
         error: function (error) {
             alert("修改失败,服务器异常");
+            // $("#saveButton").removeAttr("disabled");
+        }
+    });
+}
+
+function consumerBalanceSubmit() {
+    var phone = $('#consumer_balance_phone').val();
+    var balance = $('#consumer_balance_balance').val();
+
+    if (phone == "" || balance == "") {
+        alert("手机号和金额不能为空");
+        return false;
+    }
+    var param = {
+        phone: phone,
+        balance: balance
+    };
+
+
+    $.ajax({
+        type: "POST",
+        url: "/consumerMng/balance",
+        data: JSON.stringify(param),
+        dataType: "json",
+        contentType: "json/application",
+        async: false,
+        success: function (data) {
+            console.log(data);
+            if (data.code == 200) {
+                window.location.href = "/consumerMng/search/" + phone;
+                alert("充值成功，余额：" + data.result);
+            } else {
+                alert("充值失败",data.message);
+            }
+        },
+        error: function (error) {
+            alert("充值失败,服务器异常");
             // $("#saveButton").removeAttr("disabled");
         }
     });

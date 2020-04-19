@@ -56,4 +56,39 @@ public class ConsumerMngServiceImpl implements ConsumerMngService {
     public int deleteConsumerByPhone(String phone) {
         return consumerMapper.deleteConsumerByPhone(phone);
     }
+
+    @Transactional
+    @Override
+    public double updateBalance(String phone, double balance) {
+        try {
+            Consumer consumer = consumerMapper.findConsumerForUpdate(phone);
+            double bal = consumer.getBalance() + balance;
+            if (consumerMapper.updateBalance(phone, bal) == 1) {
+                return bal;
+            }
+            return 0;
+        } catch (Exception e) {
+            System.out.println(e);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return 0;
+        }
+
+    }
+
+    @Transactional
+    @Override
+    public double updateConsume(String phone, double consume) {
+        try {
+            Consumer consumer = consumerMapper.findConsumerForUpdate(phone);
+            double consu = consumer.getConsume() + consume;
+            if (consumerMapper.updateConsume(phone, consu) == 1) {
+                return consu;
+            }
+            return 0;
+        } catch (Exception e) {
+            System.out.println(e);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return 0;
+        }
+    }
 }

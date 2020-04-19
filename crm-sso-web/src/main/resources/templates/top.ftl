@@ -19,7 +19,7 @@
 
                 <li ($nav_head==1) class="active" ><a href="/consumerMng">客户管理</a></li>
 
-                <li ($nav_head==2) class="active" ><a href="/profitMng">产品管理</a></li>
+                <li ($nav_head==2) class="active" ><a href="/productMng">产品管理</a></li>
 
                 <li ($nav_head==3) class="active" ><a href="/profitMng">业绩管理</a></li>
                 

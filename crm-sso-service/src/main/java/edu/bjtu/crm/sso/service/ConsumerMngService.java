@@ -18,4 +18,8 @@ public interface ConsumerMngService {
     int updateConsumer(Consumer consumer);
 
     int deleteConsumerByPhone(String phone);
+
+    double updateBalance(String phone, double balance);
+
+    double updateConsume(String phone, double consume);
 }

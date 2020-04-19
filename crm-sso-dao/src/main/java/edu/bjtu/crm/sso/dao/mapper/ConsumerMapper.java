@@ -58,4 +58,19 @@ public interface ConsumerMapper {
     @Update("UPDATE crm_sso_consumer set is_delete = true " +
             " WHERE phone = #{phone} and is_delete = false")
     int deleteConsumerByPhone(String phone);
+
+    @Select("SELECT id,phone, name, vip_grade as vipGrade,email,balance,consume " +
+            "FROM crm_sso_consumer " +
+            "WHERE phone = #{phone} AND " +
+            "is_delete = false" +
+            " FOR UPDATE")
+    Consumer findConsumerForUpdate(String phone);
+
+    @Update("UPDATE crm_sso_consumer set balance = #{balance} " +
+            " WHERE phone = #{phone} and is_delete = false")
+    int updateBalance(String phone, double balance);
+
+    @Update("UPDATE crm_sso_consumer set consume = #{consume} " +
+            " WHERE phone = #{phone} and is_delete = false")
+    int updateConsume(String phone, double consume);
 }

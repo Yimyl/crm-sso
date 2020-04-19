@@ -31,6 +31,7 @@ public class ConsumerMng {
         List<Bar> bars = new ArrayList<>();
         bars.add(new Bar("客户信息查询", "consumerSearch()"));
         bars.add(new Bar("添加新客户", "consumerAdd()"));
+        bars.add(new Bar("充值", "consumerBalance()"));
         model.addAttribute("bars",bars);
         return "consumerMng";
     }
@@ -53,6 +54,7 @@ public class ConsumerMng {
         List<Bar> bars = new ArrayList<>();
         bars.add(new Bar("客户信息查询", "consumerSearch()"));
         bars.add(new Bar("添加新客户", "consumerAdd()"));
+        bars.add(new Bar("充值", "consumerBalance()"));
         model.addAttribute("bars",bars);
         Consumer consumer = consumerMngService.findConsumerByPhone(phone);
         model.addAttribute("consumerSearch", consumer);
@@ -105,6 +107,7 @@ public class ConsumerMng {
         List<Bar> bars = new ArrayList<>();
         bars.add(new Bar("客户信息查询", "consumerSearch()"));
         bars.add(new Bar("添加新客户", "consumerAdd()"));
+        bars.add(new Bar("充值", "consumerBalance()"));
         model.addAttribute("bars",bars);
         Consumer consumer = consumerMngService.findConsumerByPhone(phone);
         UserInfo userInfo = UserLocal.get();
@@ -120,6 +123,23 @@ public class ConsumerMng {
         if (consumerMngService.deleteConsumerByPhone(phone) == 1){
             response.setCode(ApiEnum.SUCCESS.getCode());
             response.setMessage(ApiEnum.SUCCESS.getValue());
+            return response;
+        }
+        response.setCode(ApiEnum.ERROR.getCode());
+        response.setMessage(ApiEnum.ERROR.getValue());
+        return response;
+    }
+
+    @RequestMapping(value = "/consumerMng/balance", method = {RequestMethod.POST}, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public CrmResponse<Double> consumerMngBalance(@RequestBody String param) {
+        CrmResponse response = new CrmResponse<>();
+        double bal = 0;
+        JSONObject consumer = JSONObject.parseObject(param);
+        if ((bal=consumerMngService.updateBalance(consumer.getString("phone"), consumer.getDouble("balance"))) != 0){
+            response.setCode(ApiEnum.SUCCESS.getCode());
+            response.setMessage(ApiEnum.SUCCESS.getValue());
+            response.setResult(bal);
             return response;
         }
         response.setCode(ApiEnum.ERROR.getCode());

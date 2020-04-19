@@ -1,21 +1,19 @@
 package edu.bjtu.crm.sso.service;
 
-import edu.bjtu.crm.sso.domain.model.Consumer;
+import edu.bjtu.crm.sso.domain.model.Product;
 
 import java.util.List;
 
 public interface ProductMngService {
-    int addConsumer(Consumer consumer);
+    int addProduct(Product product);
 
-    Consumer findConsumerByName(String name);
+    Product findProductByName(String name);
 
-    Consumer findConsumerById(long id);
+    Product findProductById(long id);
 
-    Consumer findConsumerByPhone(String phone);
+    List<Product> findProductByProduct(Product product);
 
-    List<Consumer> findConsumerByConsumer(Consumer consumer);
+    int updateProduct(Product product);
 
-    int updateConsumer(Consumer consumer);
-
-    int deleteConsumerByPhone(String phone);
+    int deleteProductByName(String name);
 }

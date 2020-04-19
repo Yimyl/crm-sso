@@ -32,7 +32,8 @@
 <#--    <script src="/js/template.js"></script>-->
 <#--    <script src="/js/tools/jquery.webui-popover.min.js"></script>-->
 <#--    <script src="/js/require.js"></script>-->
-<#--    <script src="/js/main.js"></script>-->
+    <script src="/js/main.js"></script>
+    <script src="/js/util.js"></script>
 </head>
 <body>
 </body>

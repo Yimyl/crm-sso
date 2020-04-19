@@ -162,10 +162,8 @@ public class UserMng {
                 response.setMessage(ApiEnum.PERMISSION_DENIED.getValue());
                 return response;
             }
-            System.out.println("delete");
             response.setCode(ApiEnum.SUCCESS.getCode());
             response.setMessage(ApiEnum.SUCCESS.getValue());
-            System.out.println(username);
             userMngService.deleteUserInfoByUsername(username);
             return response;
         } catch (Exception e) {
