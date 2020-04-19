@@ -84,7 +84,7 @@ public interface RecordYearMapper {
             "            AND create_time &gt;= #{startTime}" +
             "        </if>" +
             "        <if test=\"endTime != null\">" +
-            "            AND create_time &lt; #{endTime}}" +
+            "            AND create_time &lt; #{endTime}" +
             "        </if>" +
             " AND is_delete = false" +
             "    </where></script>")
@@ -101,7 +101,7 @@ public interface RecordYearMapper {
             "            AND create_time &gt;= #{startTime}" +
             "        </if>" +
             "        <if test=\"endTime != null\">" +
-            "            AND create_time &lt; #{endTime}}" +
+            "            AND create_time &lt; #{endTime}" +
             "        </if>" +
             " AND is_delete = false" +
             "    </where></script>")
@@ -118,7 +118,7 @@ public interface RecordYearMapper {
             "            AND create_time &gt;= #{startTime}" +
             "        </if>" +
             "        <if test=\"endTime != null\">" +
-            "            AND create_time &lt; #{endTime}}" +
+            "            AND create_time &lt; #{endTime}" +
             "        </if>" +
             " AND is_delete = false" +
             "    </where></script>")

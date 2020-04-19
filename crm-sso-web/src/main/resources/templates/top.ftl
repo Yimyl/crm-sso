@@ -23,7 +23,7 @@
 
                 <li ($nav_head==3) class="active" ><a href="/profitMng">业绩管理</a></li>
                 
-                <li ($nav_head==4) class="active" ><a href="$baseurl/mng/statistics/index">效果报表</a></li>
+                <li ($nav_head==4) class="active" ><a href="/statementMng">效果报表</a></li>
                 
                 <li ($nav_head==5) class="active" ><a href="$baseurl/mng/commission/index">结算管理</a></li>
                 

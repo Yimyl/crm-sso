@@ -2,9 +2,7 @@ package edu.bjtu.crm.sso.web.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import edu.bjtu.crm.sso.common.CrmResponse;
-import edu.bjtu.crm.sso.domain.model.Consumer;
-import edu.bjtu.crm.sso.domain.model.Record;
-import edu.bjtu.crm.sso.domain.model.UserInfo;
+import edu.bjtu.crm.sso.domain.model.*;
 import edu.bjtu.crm.sso.service.ConsumerMngService;
 import edu.bjtu.crm.sso.service.ProductMngService;
 import edu.bjtu.crm.sso.service.ProfitMngService;
@@ -48,15 +46,139 @@ public class StatementMng {
         return "statementMng";
     }
 
-    @RequestMapping("/statementMng/searchUser")
+    @RequestMapping("/statementMng/search/day/user")
     @ResponseBody
-    public CrmResponse<List<Record>> statementMngSearch(@RequestBody String param, Model model) {
-        CrmResponse<List<Record>> response = new CrmResponse<>();
+    public CrmResponse<List<RecordDay>> statementMngSearchDayUser(@RequestBody String param, Model model) {
+        CrmResponse<List<RecordDay>> response = new CrmResponse<>();
         JSONObject jsonObject = JSONObject.parseObject(param);
         Record record = jsonObject.getObject("record", Record.class);
         Date startTime = jsonObject.getObject("startTime", Date.class);
         Date endTime = jsonObject.getObject("endTime", Date.class);
-        List<Record> list = statementMngService.findRecordByRecord(record, startTime, endTime);
+        List<RecordDay> list = statementMngService.findRecordDayUserByRecord(record, startTime, endTime);
+        response.setCode(ApiEnum.SUCCESS.getCode());
+        response.setMessage(ApiEnum.SUCCESS.getValue());
+        response.setResult(list);
+        return response;
+    }
+
+    @RequestMapping("/statementMng/search/day/consumer")
+    @ResponseBody
+    public CrmResponse<List<RecordDay>> statementMngSearchDayConsumer(@RequestBody String param, Model model) {
+        CrmResponse<List<RecordDay>> response = new CrmResponse<>();
+        JSONObject jsonObject = JSONObject.parseObject(param);
+        Record record = jsonObject.getObject("record", Record.class);
+        Date startTime = jsonObject.getObject("startTime", Date.class);
+        Date endTime = jsonObject.getObject("endTime", Date.class);
+        List<RecordDay> list = statementMngService.findRecordDayConsumerByRecord(record, startTime, endTime);
+        response.setCode(ApiEnum.SUCCESS.getCode());
+        response.setMessage(ApiEnum.SUCCESS.getValue());
+        response.setResult(list);
+        return response;
+    }
+
+    @RequestMapping("/statementMng/search/day/product")
+    @ResponseBody
+    public CrmResponse<List<RecordDay>> statementMngSearchDayProduct(@RequestBody String param, Model model) {
+        CrmResponse<List<RecordDay>> response = new CrmResponse<>();
+        JSONObject jsonObject = JSONObject.parseObject(param);
+        Record record = jsonObject.getObject("record", Record.class);
+        Date startTime = jsonObject.getObject("startTime", Date.class);
+        Date endTime = jsonObject.getObject("endTime", Date.class);
+        List<RecordDay> list = statementMngService.findRecordDayProductByRecord(record, startTime, endTime);
+        response.setCode(ApiEnum.SUCCESS.getCode());
+        response.setMessage(ApiEnum.SUCCESS.getValue());
+        response.setResult(list);
+        return response;
+    }
+
+
+    @RequestMapping("/statementMng/search/month/user")
+    @ResponseBody
+    public CrmResponse<List<RecordMonth>> statementMngSearchMonthUser(@RequestBody String param, Model model) {
+        CrmResponse<List<RecordMonth>> response = new CrmResponse<>();
+        JSONObject jsonObject = JSONObject.parseObject(param);
+        Record record = jsonObject.getObject("record", Record.class);
+        Date startTime = jsonObject.getObject("startTime", Date.class);
+        Date endTime = jsonObject.getObject("endTime", Date.class);
+        List<RecordMonth> list = statementMngService.findRecordMonthUserByRecord(record, startTime, endTime);
+        response.setCode(ApiEnum.SUCCESS.getCode());
+        response.setMessage(ApiEnum.SUCCESS.getValue());
+        response.setResult(list);
+        return response;
+    }
+
+    @RequestMapping("/statementMng/search/month/consumer")
+    @ResponseBody
+    public CrmResponse<List<RecordMonth>> statementMngSearchMonthConsumer(@RequestBody String param, Model model) {
+        CrmResponse<List<RecordMonth>> response = new CrmResponse<>();
+        JSONObject jsonObject = JSONObject.parseObject(param);
+        Record record = jsonObject.getObject("record", Record.class);
+        Date startTime = jsonObject.getObject("startTime", Date.class);
+        Date endTime = jsonObject.getObject("endTime", Date.class);
+        List<RecordMonth> list = statementMngService.findRecordMonthConsumerByRecord(record, startTime, endTime);
+        response.setCode(ApiEnum.SUCCESS.getCode());
+        response.setMessage(ApiEnum.SUCCESS.getValue());
+        response.setResult(list);
+        return response;
+    }
+
+    @RequestMapping("/statementMng/search/month/product")
+    @ResponseBody
+    public CrmResponse<List<RecordMonth>> statementMngSearchMonthProduct(@RequestBody String param, Model model) {
+        CrmResponse<List<RecordMonth>> response = new CrmResponse<>();
+        JSONObject jsonObject = JSONObject.parseObject(param);
+        Record record = jsonObject.getObject("record", Record.class);
+        Date startTime = jsonObject.getObject("startTime", Date.class);
+        Date endTime = jsonObject.getObject("endTime", Date.class);
+        List<RecordMonth> list = statementMngService.findRecordMonthProductByRecord(record, startTime, endTime);
+        response.setCode(ApiEnum.SUCCESS.getCode());
+        response.setMessage(ApiEnum.SUCCESS.getValue());
+        response.setResult(list);
+        return response;
+    }
+
+
+
+
+    @RequestMapping("/statementMng/search/year/user")
+    @ResponseBody
+    public CrmResponse<List<RecordYear>> statementMngSearchYearUser(@RequestBody String param, Model model) {
+        CrmResponse<List<RecordYear>> response = new CrmResponse<>();
+        JSONObject jsonObject = JSONObject.parseObject(param);
+        Record record = jsonObject.getObject("record", Record.class);
+        Date startTime = jsonObject.getObject("startTime", Date.class);
+        Date endTime = jsonObject.getObject("endTime", Date.class);
+        List<RecordYear> list = statementMngService.findRecordYearUserByRecord(record, startTime, endTime);
+        response.setCode(ApiEnum.SUCCESS.getCode());
+        response.setMessage(ApiEnum.SUCCESS.getValue());
+        response.setResult(list);
+        return response;
+    }
+
+    @RequestMapping("/statementMng/search/year/consumer")
+    @ResponseBody
+    public CrmResponse<List<RecordYear>> statementMngSearchYearConsumer(@RequestBody String param, Model model) {
+        CrmResponse<List<RecordYear>> response = new CrmResponse<>();
+        JSONObject jsonObject = JSONObject.parseObject(param);
+        Record record = jsonObject.getObject("record", Record.class);
+        Date startTime = jsonObject.getObject("startTime", Date.class);
+        Date endTime = jsonObject.getObject("endTime", Date.class);
+        List<RecordYear> list = statementMngService.findRecordYearConsumerByRecord(record, startTime, endTime);
+        response.setCode(ApiEnum.SUCCESS.getCode());
+        response.setMessage(ApiEnum.SUCCESS.getValue());
+        response.setResult(list);
+        return response;
+    }
+
+    @RequestMapping("/statementMng/search/year/product")
+    @ResponseBody
+    public CrmResponse<List<RecordYear>> statementMngSearchYearProduct(@RequestBody String param, Model model) {
+        CrmResponse<List<RecordYear>> response = new CrmResponse<>();
+        JSONObject jsonObject = JSONObject.parseObject(param);
+        Record record = jsonObject.getObject("record", Record.class);
+        Date startTime = jsonObject.getObject("startTime", Date.class);
+        Date endTime = jsonObject.getObject("endTime", Date.class);
+        List<RecordYear> list = statementMngService.findRecordYearProductByRecord(record, startTime, endTime);
         response.setCode(ApiEnum.SUCCESS.getCode());
         response.setMessage(ApiEnum.SUCCESS.getValue());
         response.setResult(list);
